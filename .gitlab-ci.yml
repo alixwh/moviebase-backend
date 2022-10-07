@@ -4,6 +4,8 @@ stages:
 
 build test-backend:
   stage: build
+  tags:
+    - main
 
   script:
     - chmod +x ./gradlew
@@ -11,6 +13,10 @@ build test-backend:
     - docker build -t test-backend .
 deploy test-backend:
   stage: deploy
+  tags:
+    - main
+
   script:
+    - cd /home/ubuntu/opt/web-project/
     - docker-compose down
     - docker-compose up -d
