@@ -4,8 +4,6 @@ stages:
 build test-backend:
   stage: build
 
-  tags:
-      - main
   script:
     - ./gradlew build
     - docker build -t test-backend .
