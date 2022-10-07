@@ -4,6 +4,9 @@ stages:
 
 build test-backend:
   stage: build
+  only:
+    refs:
+      - master
   tags:
     - main
 
@@ -13,6 +16,9 @@ build test-backend:
     - docker build -t test-backend .
 deploy test-backend:
   stage: deploy
+  only:
+    refs:
+      - master
   tags:
     - main
 
