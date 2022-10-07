@@ -6,7 +6,7 @@ build test-backend:
   stage: build
   only:
     refs:
-       - master
+       - main
   tags:
       - main
   script:
@@ -17,7 +17,7 @@ deploy test-backend:
     stage: deploy
     only:
       refs:
-        - master
+        - main
     tags:
       - main
     script:
