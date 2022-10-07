@@ -6,7 +6,7 @@ build test-backend:
   stage: build
 
   script:
-    - chmod + ./gradlew
+    - chmod +x ./gradlew
     - ./gradlew build
     - docker build -t test-backend .
 deploy test-backend:
