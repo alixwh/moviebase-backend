@@ -1,0 +1,26 @@
+stages:
+  - build
+  - deploy
+
+build test-backend:
+  stage: build
+  only:
+    refs:
+       - master
+  tags:
+      - main
+  script:
+    - ./mvnw package
+    - docker build -t test-backend .
+
+deploy test-backend:
+    stage: deploy
+    only:
+      refs:
+        - master
+    tags:
+      - main
+    script:
+      - cd /opt/web-project
+      - docker-compose down
+      - docker-compose up -d
