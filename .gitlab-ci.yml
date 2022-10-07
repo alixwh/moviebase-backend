@@ -1,5 +1,6 @@
 stages:
   - build
+  - deploy
 
 build test-backend:
   stage: build
@@ -7,3 +8,8 @@ build test-backend:
   script:
     - ./gradlew build
     - docker build -t test-backend .
+deploy test-backend:
+  stage: deploy
+  script:
+    - docker-compose down
+    - docker-compose up -d
