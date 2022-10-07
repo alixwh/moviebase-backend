@@ -6,21 +6,23 @@ build test-backend:
   stage: build
   only:
     refs:
-       - main
+      - master
   tags:
-      - main
-  script:
-    - ./mvnw package
-    - docker build -t test-backend .
+    - main
 
+  script:
+    - chmod +x ./gradlew
+    - ./gradlew build
+    - docker build -t test-backend .
 deploy test-backend:
-    stage: deploy
-    only:
-      refs:
-        - main
-    tags:
-      - main
-    script:
-      - cd /opt/web-project
-      - docker-compose down
-      - docker-compose up -d
+  stage: deploy
+  only:
+    refs:
+      - master
+  tags:
+    - main
+
+  script:
+    - cd /home/ubuntu/opt/web-project/
+    - docker-compose down
+    - docker-compose up -d
