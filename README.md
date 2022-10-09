@@ -11,7 +11,7 @@ Docker Desktop
 >server.port=8080  # server HTTP port  
 spring.datasource.url=jdbc:postgresql://localhost/postgres  # JDBC url of the database   
 spring.datasource.username=${username}  # login username of the database  
-spring.datasource.password=${password}  #  password for authentication with Elasticsearch
+spring.datasource.password=${password}  #  password for authentication with Elasticsearch  
 spring.datasource.driver-class-name=org.postgresql.Driver  #  name of the JDBC driver  
 
 This sets the local database as datasource.
