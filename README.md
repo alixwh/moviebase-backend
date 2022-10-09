@@ -11,11 +11,11 @@ For frontend:
 NPM (npm install -g @vue/cli)
 ### Config properties
 Make the application-local.properties file at src\main\resources\application-local.properties and then add:  
->server.port=8080
-spring.datasource.url=jdbc:postgresql://localhost/postgres
-spring.datasource.username=postgres
-spring.datasource.password=docker
-spring.datasource.driver-class-name=org.postgresql.Driver
+>server.port=8080  
+spring.datasource.url=jdbc:postgresql://localhost/postgres  
+spring.datasource.username=postgres  
+spring.datasource.password=docker  
+spring.datasource.driver-class-name=org.postgresql.Driver  
 
 This sets the local database as datasource.
 ### Local development
