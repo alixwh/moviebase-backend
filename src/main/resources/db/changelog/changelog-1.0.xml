@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet  id="20221017-1"  author="brkerg">
+        <createTable  tableName="movie">
+            <column  name="id"  type="int"  autoIncrement="true">
+                <constraints  primaryKey="true"  nullable="false"  unique="true"/>
+            </column>
+            <column  name="title"  type="text">
+                <constraints  nullable="false"/>
+            </column>
+            <column  name="description"  type="text"/>
+            <column  name="year"  type="int"/>
+            <column  name="rating"  type="float"/>
+        </createTable>
+
+        <createTable  tableName="account">
+            <column  name="id"  type="int"  autoIncrement="true">
+                <constraints  primaryKey="true"  nullable="false"  unique="true"/>
+            </column>
+            <column  name="username"  type="varchar(15)">
+                <constraints  nullable="false"  unique="true"/>
+            </column>
+            <column  name="password"  type="text">
+                <constraints  nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable  tableName="genre">
+            <column  name="id"  type="int"  autoIncrement="true">
+                <constraints  primaryKey="true"  nullable="false"  unique="true"/>
+            </column>
+            <column  name="name"  type="text">
+                <constraints  unique="true"/>
+            </column>
+        </createTable>
+
+        <createTable  tableName="comment">
+            <column  name="id"  type="int"  autoIncrement="true">
+                <constraints  primaryKey="true"  nullable="false"  unique="true"/>
+            </column>
+            <column  name="movie_id"  type="int">
+                <constraints  nullable="false"
+                              foreignKeyName="fk_comment_movie"
+                              references="movie(id)"/>
+            </column>
+            <column  name="account_id"  type="int">
+                <constraints  nullable="false"
+                              foreignKeyName="fk_comment_account"
+                              references="account(id)"/>
+            </column>
+            <column  name="comment_text"  type="text"/>
+        </createTable>
+
+        <createTable  tableName="actor">
+            <column  name="id"  type="int"  autoIncrement="true">
+                <constraints  primaryKey="true"  nullable="false"  unique="true"/>
+            </column>
+            <column  name="name"  type="text">
+                <constraints  nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable  tableName="director">
+            <column  name="id"  type="int"  autoIncrement="true">
+                <constraints  primaryKey="true"  nullable="false"  unique="true"/>
+            </column>
+            <column  name="name"  type="text">
+                <constraints  nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable  tableName="movie_genre">
+            <column  name="movie_id"  type="int">
+                <constraints  nullable="false"
+                              foreignKeyName="fk_movie_genre_movie"
+                              references="movie(id)"/>
+            </column>
+            <column  name="genre_id"  type="int">
+                <constraints  nullable="false"
+                              foreignKeyName="fk_movie_genre_genre"
+                              references="genre(id)"/>
+            </column>
+        </createTable>
+
+        <createTable  tableName="movie_director">
+            <column  name="movie_id"  type="int">
+                <constraints  nullable="false"
+                              foreignKeyName="fk_movie_director_movie"
+                              references="movie(id)"/>
+            </column>
+            <column  name="director_id"  type="int">
+                <constraints  nullable="false"
+                              foreignKeyName="fk_movie_director_director"
+                              references="director(id)"/>
+            </column>
+        </createTable>
+
+        <createTable  tableName="movie_actor">
+            <column  name="movie_id"  type="int">
+                <constraints  nullable="false"
+                              foreignKeyName="fk_movie_actor_movie"
+                              references="movie(id)"/>
+            </column>
+            <column  name="actor_id"  type="int">
+                <constraints  nullable="false"
+                              foreignKeyName="fk_movie_actor_actor"
+                              references="actor(id)"/>
+            </column>
+        </createTable>
+
+        <createTable  tableName="account_account_friendlist">
+            <column  name="account1_id"  type="int">
+                <constraints  nullable="false"
+                              foreignKeyName="fk_friendlist_account1_account"
+                              references="account(id)"/>
+            </column>
+            <column  name="account2_id"  type="int">
+                <constraints  nullable="false"
+                              foreignKeyName="fk_friendlist_account2_account"
+                              references="account(id)"/>
+            </column>
+        </createTable>
+
+        <sql>CREATE TYPE progress_status AS ENUM ('watching', 'want to watch', 'dropped', 'completed')</sql>
+
+        <createTable  tableName="account_movie">
+            <column  name="account_id"  type="int">
+                <constraints  nullable="false"
+                              foreignKeyName="fk_account_movie_account"
+                              references="account(id)"/>
+            </column>
+            <column  name="movie_id"  type="int">
+                <constraints  nullable="false"
+                              foreignKeyName="fk_account_movie_movie"
+                              references="movie(id)"/>
+            </column>
+            <column  name="state"  type="progress_status">
+                <constraints  nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
