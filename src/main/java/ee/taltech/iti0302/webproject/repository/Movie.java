@@ -17,6 +17,7 @@ public class Movie {
     private String title;
     private String description;
     private int year;
+    private double rating;
 
     @ManyToMany
     @JoinTable(
@@ -74,5 +75,4 @@ public class Movie {
         this.rating = rating;
     }
 
-    private double rating;
 }

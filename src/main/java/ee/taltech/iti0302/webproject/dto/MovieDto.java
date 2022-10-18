@@ -8,6 +8,16 @@ public class MovieDto {
     private String title;
     private String description;
     private int year;
+    private double rating;
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
     private Set<String> genresList;
 
     public String getTitle() {
