@@ -21,5 +21,7 @@ public class MovieService {
         return movieMapper.toDtoList(movieRepository.findAll());
     }
 
-
+    public MovieDto findById(int id) {
+        return movieMapper.toDto(movieRepository.findById(id).orElse(null));
+    }
 }

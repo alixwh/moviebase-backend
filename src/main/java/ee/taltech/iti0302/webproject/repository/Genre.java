@@ -15,7 +15,15 @@ public class Genre {
     private String name;
 
     @ManyToMany(mappedBy = "genres")
-    Set<Movie> movies;
+    private Set<Movie> movies;
+
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
+    }
 
     public int getId() {
         return id;
