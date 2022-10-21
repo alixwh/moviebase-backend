@@ -1,15 +1,14 @@
 package ee.taltech.iti0302.webproject.dto;
 
-import ee.taltech.iti0302.webproject.repository.Account;
-import ee.taltech.iti0302.webproject.repository.Movie;
+import lombok.Data;
 
 import java.util.Set;
 
+@Data
 public class AccountDto {
     private int id;
     private String username;
     private String password;
-    private Set<Account> friendList;
-    private Set<Movie> moviesList;
-
+    private Set<String> friendList;
+    private Set<String> moviesList;
 }
