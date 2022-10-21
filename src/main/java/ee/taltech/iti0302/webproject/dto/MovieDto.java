@@ -13,5 +13,7 @@ public class MovieDto {
     private int year;
     private double rating;
     private Set<String> genresList;
+    private Set<String> actorsList;
+    private Set<String> directorsList;
 
 }
