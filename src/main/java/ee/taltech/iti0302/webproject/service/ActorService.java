@@ -16,6 +16,5 @@ public class ActorService {
 
     public List<ActorDto> findAll() {
         return actorMapper.toDtoList(actorRepository.findAll());
-
     }
 }

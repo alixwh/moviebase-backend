@@ -1,8 +1,6 @@
 package ee.taltech.iti0302.webproject.mapper;
 
-import ee.taltech.iti0302.webproject.dto.ActorDto;
 import ee.taltech.iti0302.webproject.dto.DirectorDto;
-import ee.taltech.iti0302.webproject.repository.Actor;
 import ee.taltech.iti0302.webproject.repository.Director;
 import ee.taltech.iti0302.webproject.repository.Movie;
 import org.mapstruct.Mapper;
@@ -21,5 +19,5 @@ public interface DirectorMapper {
         return movie.getTitle();
     }
 
-    List<ActorDto> toDtoList(List<Actor> actors);
+    List<DirectorDto> toDtoList(List<Director> all);
 }
