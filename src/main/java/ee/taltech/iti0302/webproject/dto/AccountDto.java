@@ -10,6 +10,6 @@ public class AccountDto {
     private String username;
     private String password;
     private Set<Account> friendList;
-    private Set<Movie> movies;
+    private Set<Movie> moviesList;
 
 }
