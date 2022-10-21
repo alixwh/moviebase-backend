@@ -27,4 +27,6 @@ public class Movie {
     @JoinTable(name = "movie_genre", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<Genre> genres;
 
+    @ManyToMany(mappedBy = "movies")
+    private Set<Comment> comments;
 }
