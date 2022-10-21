@@ -16,7 +16,7 @@ public class Account {
     private String password;
 
     @ManyToMany
-    @JoinTable(name = "account_account", joinColumns = @JoinColumn(name = "account1_id"), inverseJoinColumns = @JoinColumn(name = "account2_id"))
+    @JoinTable(name = "account_account_friendlist", joinColumns = @JoinColumn(name = "account1_id"), inverseJoinColumns = @JoinColumn(name = "account2_id"))
     private Set<Account> friends;
 
     @ManyToMany

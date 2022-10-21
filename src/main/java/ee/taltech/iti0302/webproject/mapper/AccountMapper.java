@@ -5,14 +5,16 @@ import ee.taltech.iti0302.webproject.repository.Account;
 import ee.taltech.iti0302.webproject.repository.Movie;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AccountMapper {
-    @Mapping(source = "movies", target = "moviesList")
-    @Mapping(source = "friends", target = "friendList")
+    @Mappings({
+            @Mapping(source = "movies", target = "moviesList"),
+            @Mapping(source = "friends", target = "friendList")})
     AccountDto toDto(Account account);
 
     default String mapToMovieTitle(Movie movie) {
@@ -23,6 +25,6 @@ public interface AccountMapper {
         return account.getUsername();
     }
 
-    List<AccountDto> toDtoList(List<Account> acocunts);
+    List<AccountDto> toDtoList(List<Account> accounts);
 
 }
