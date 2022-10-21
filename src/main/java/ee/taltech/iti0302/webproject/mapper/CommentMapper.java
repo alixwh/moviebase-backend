@@ -13,8 +13,8 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CommentMapper {
     @Mappings({
-            @Mapping(source = "movies", target = "moviesList"),
-            @Mapping(source = "accounts", target = "accountList")})
+            @Mapping(source = "movie.title", target = "movie"),
+            @Mapping(source = "account.username", target = "account")})
     CommentDto toDto(Comment comment);
 
     default String mapToMovieTitle(Movie movie) {
