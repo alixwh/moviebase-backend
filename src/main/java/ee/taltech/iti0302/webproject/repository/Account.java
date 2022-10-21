@@ -19,6 +19,7 @@ public class Account {
     @JoinTable(name = "account_account", joinColumns = @JoinColumn(name = "account1_id"), inverseJoinColumns = @JoinColumn(name = "account2_id"))
     private Set<Account> friends;
 
-    @ManyToMany(mappedBy = "movie")
+    @ManyToMany
+    @JoinTable(name = "account_movie", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private Set<Movie> movies;
 }
