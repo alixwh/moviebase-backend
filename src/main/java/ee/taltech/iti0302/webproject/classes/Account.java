@@ -1,4 +1,4 @@
-package ee.taltech.iti0302.webproject.repository;
+package ee.taltech.iti0302.webproject.classes;
 
 import lombok.Getter;
 import lombok.Setter;

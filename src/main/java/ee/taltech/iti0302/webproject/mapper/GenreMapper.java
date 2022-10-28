@@ -1,8 +1,8 @@
 package ee.taltech.iti0302.webproject.mapper;
 
 import ee.taltech.iti0302.webproject.dto.GenreDto;
-import ee.taltech.iti0302.webproject.repository.Genre;
-import ee.taltech.iti0302.webproject.repository.Movie;
+import ee.taltech.iti0302.webproject.classes.Genre;
+import ee.taltech.iti0302.webproject.classes.Movie;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

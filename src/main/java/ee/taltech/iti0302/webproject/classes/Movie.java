@@ -1,15 +1,9 @@
-package ee.taltech.iti0302.webproject.repository;
+package ee.taltech.iti0302.webproject.classes;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 @Getter @Setter
@@ -27,7 +21,7 @@ public class Movie {
     @JoinTable(name = "movie_genre", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<Genre> genres;
 
-    @ManyToMany(mappedBy = "movies")
+    @OneToMany(mappedBy = "movie")
     private Set<Comment> comments;
 
     @ManyToMany
