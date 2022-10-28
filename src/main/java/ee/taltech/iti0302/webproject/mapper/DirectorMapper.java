@@ -1,8 +1,8 @@
 package ee.taltech.iti0302.webproject.mapper;
 
 import ee.taltech.iti0302.webproject.dto.DirectorDto;
-import ee.taltech.iti0302.webproject.classes.Director;
-import ee.taltech.iti0302.webproject.classes.Movie;
+import ee.taltech.iti0302.webproject.entities.Director;
+import ee.taltech.iti0302.webproject.entities.Movie;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

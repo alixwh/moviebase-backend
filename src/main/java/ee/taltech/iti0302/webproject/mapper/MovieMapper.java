@@ -1,10 +1,10 @@
 package ee.taltech.iti0302.webproject.mapper;
 
 import ee.taltech.iti0302.webproject.dto.MovieDto;
-import ee.taltech.iti0302.webproject.classes.Actor;
-import ee.taltech.iti0302.webproject.classes.Director;
-import ee.taltech.iti0302.webproject.classes.Genre;
-import ee.taltech.iti0302.webproject.classes.Movie;
+import ee.taltech.iti0302.webproject.entities.Actor;
+import ee.taltech.iti0302.webproject.entities.Director;
+import ee.taltech.iti0302.webproject.entities.Genre;
+import ee.taltech.iti0302.webproject.entities.Movie;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
