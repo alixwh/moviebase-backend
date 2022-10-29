@@ -1,6 +1,7 @@
 package ee.taltech.iti0302.webproject.service;
 
 import ee.taltech.iti0302.webproject.dto.ActorDto;
+import ee.taltech.iti0302.webproject.entities.Actor;
 import ee.taltech.iti0302.webproject.mapper.ActorMapper;
 import ee.taltech.iti0302.webproject.repository.ActorRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,5 +17,9 @@ public class ActorService {
 
     public List<ActorDto> findAll() {
         return actorMapper.toDtoList(actorRepository.findAll());
+    }
+
+    public void save(Actor actor) {
+        actorRepository.save(actor);
     }
 }

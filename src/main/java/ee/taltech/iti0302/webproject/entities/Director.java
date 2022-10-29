@@ -1,16 +1,16 @@
 package ee.taltech.iti0302.webproject.entities;
 
+import ee.taltech.iti0302.webproject.api.entities.CrewMember;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
 
- @Getter @Setter
+@Getter @Setter
 @Entity
-public class Director {
+public class Director extends CrewMember {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
 
