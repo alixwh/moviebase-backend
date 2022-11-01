@@ -19,6 +19,10 @@ public class GenreService {
         return genreMapper.toDto(genreRepository.findById(id).orElse(null));
     }
 
+    public Genre findGenreById(int id) {
+        return genreRepository.findById(id).orElse(null);
+    }
+
     public List<GenreDto> findAll() {
         return genreMapper.toDtoList(genreRepository.findAll());
     }

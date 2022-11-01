@@ -23,10 +23,11 @@ public class MovieService {
         return movieMapper.toDto(movieRepository.findById(id).orElse(null));
     }
 
+    public boolean isMovieInDatabase(Integer movieId) {
+        return movieRepository.existsById(movieId);
+    }
+
     public Movie save(Movie movie) {
-        if (movieRepository.existsById(movie.getId())) {
-            return null;
-        }
         return movieRepository.save(movie);
     }
 }
