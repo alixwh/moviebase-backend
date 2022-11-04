@@ -1,7 +1,6 @@
-package ee.taltech.iti0302.webproject.api.entities;
+package ee.taltech.iti0302.webproject.api.externallistdto;
 
-import ee.taltech.iti0302.webproject.entities.Movie;
-import ee.taltech.iti0302.webproject.externaldto.MovieExternalDto;
+import ee.taltech.iti0302.webproject.api.externaldto.MovieExternalDto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

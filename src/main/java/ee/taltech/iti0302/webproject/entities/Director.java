@@ -1,6 +1,6 @@
 package ee.taltech.iti0302.webproject.entities;
 
-import ee.taltech.iti0302.webproject.api.entities.CrewMember;
+import ee.taltech.iti0302.webproject.api.externallistdto.CrewMember;
 import lombok.Getter;
 import lombok.Setter;
 

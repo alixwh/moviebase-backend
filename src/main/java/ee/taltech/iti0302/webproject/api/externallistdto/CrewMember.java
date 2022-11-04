@@ -1,4 +1,4 @@
-package ee.taltech.iti0302.webproject.api.entities;
+package ee.taltech.iti0302.webproject.api.externallistdto;
 
 import lombok.Getter;
 import lombok.Setter;

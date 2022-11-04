@@ -1,13 +1,13 @@
 package ee.taltech.iti0302.webproject.api;
 
-import ee.taltech.iti0302.webproject.api.entities.CreditsList;
-import ee.taltech.iti0302.webproject.api.entities.GenreList;
-import ee.taltech.iti0302.webproject.api.entities.MovieListExternalDto;
+import ee.taltech.iti0302.webproject.api.externallistdto.CreditsList;
+import ee.taltech.iti0302.webproject.api.externallistdto.GenreList;
+import ee.taltech.iti0302.webproject.api.externallistdto.MovieListExternalDto;
 import ee.taltech.iti0302.webproject.entities.Actor;
 import ee.taltech.iti0302.webproject.entities.Director;
 import ee.taltech.iti0302.webproject.entities.Genre;
 import ee.taltech.iti0302.webproject.entities.Movie;
-import ee.taltech.iti0302.webproject.externaldto.MovieExternalDto;
+import ee.taltech.iti0302.webproject.api.externaldto.MovieExternalDto;
 import ee.taltech.iti0302.webproject.service.ActorService;
 import ee.taltech.iti0302.webproject.service.DirectorService;
 import ee.taltech.iti0302.webproject.service.GenreService;

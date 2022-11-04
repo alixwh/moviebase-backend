@@ -1,4 +1,4 @@
-package ee.taltech.iti0302.webproject.api.entities;
+package ee.taltech.iti0302.webproject.api.externallistdto;
 
 import ee.taltech.iti0302.webproject.entities.Actor;
 import ee.taltech.iti0302.webproject.entities.Director;
