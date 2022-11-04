@@ -26,8 +26,4 @@ public class GenreService {
     public List<GenreDto> findAll() {
         return genreMapper.toDtoList(genreRepository.findAll());
     }
-
-    public void save(Genre genre) {
-        genreRepository.save(genre);
-    }
 }

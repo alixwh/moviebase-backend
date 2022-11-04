@@ -15,7 +15,6 @@ import java.util.List;
 public interface MovieMapper {
     // Genre to movie
     @Mapping(source = "genres", target = "genresList")
-    MovieDto toDto(Movie movie);
     default String mapToGenreName(Genre genre) {
         return genre.getName();
     }
@@ -29,5 +28,7 @@ public interface MovieMapper {
     default String mapToDirectorName(Director director) {
         return director.getName();
     }
-    List<MovieDto> toDtoList(List<Movie> movies);// Genre to movie
+
+    MovieDto toDto(Movie movie);
+    List<MovieDto> toDtoList(List<Movie> movies);
 }

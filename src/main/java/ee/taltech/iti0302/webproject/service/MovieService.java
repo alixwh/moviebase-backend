@@ -1,7 +1,6 @@
 package ee.taltech.iti0302.webproject.service;
 
 import ee.taltech.iti0302.webproject.dto.MovieDto;
-import ee.taltech.iti0302.webproject.entities.Movie;
 import ee.taltech.iti0302.webproject.mapper.MovieMapper;
 import ee.taltech.iti0302.webproject.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +20,5 @@ public class MovieService {
 
     public MovieDto findById(int id) {
         return movieMapper.toDto(movieRepository.findById(id).orElse(null));
-    }
-
-    public boolean isMovieInDatabase(Integer movieId) {
-        return movieRepository.existsById(movieId);
-    }
-
-    public Movie save(Movie movie) {
-        return movieRepository.save(movie);
     }
 }

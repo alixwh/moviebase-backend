@@ -13,6 +13,7 @@ import java.util.List;
 public interface DirectorMapper {
 
     @Mapping(source = "movies", target = "directorMovies")
+
     DirectorDto toDto(Director director);
 
     default String mapToMovieTitle(Movie movie) {

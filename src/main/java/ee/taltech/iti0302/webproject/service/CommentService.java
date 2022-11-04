@@ -21,5 +21,4 @@ public class CommentService {
     public List<CommentDto> findAll() {
         return commentMapper.toDtoList(commentRepository.findAll());
     }
-
 }

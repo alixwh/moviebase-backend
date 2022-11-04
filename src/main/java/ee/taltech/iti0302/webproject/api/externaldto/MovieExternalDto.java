@@ -18,5 +18,4 @@ public class MovieExternalDto {
     private double voteAverage;
     @JsonProperty("genre_ids")
     private Set<Integer> genreIds;
-
 }
