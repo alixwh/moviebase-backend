@@ -6,11 +6,12 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @Getter @Setter
 @RequiredArgsConstructor
 public class CreditsList {
-    private Set<Actor> cast;
+    private List<Actor> cast;
     private Set<Director> crew;
 }

@@ -16,10 +16,13 @@ public class Movie {
     private int id;
     private String title;
     private String overview;
-    private LocalDate release_date;
-    private double vote_average;
+    @JsonProperty("release_date")
+    private LocalDate releaseDate;
+    @JsonProperty("vote_average")
+    private double voteAverage;
+    @JsonProperty("genre_ids")
     @Transient
-    private Set<Integer> genre_ids;
+    private Set<Integer> genreIds;
 
     @ManyToMany
     @JoinTable(name = "movie_genre", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))
