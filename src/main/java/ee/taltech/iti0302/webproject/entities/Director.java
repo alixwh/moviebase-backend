@@ -1,6 +1,6 @@
 package ee.taltech.iti0302.webproject.entities;
 
-import ee.taltech.iti0302.webproject.api.externallistdto.CrewMember;
+import ee.taltech.iti0302.webproject.api.externallistdto.CrewMemberDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Getter @Setter
 @Entity
-public class Director extends CrewMember {
+public class Director extends CrewMemberDto {
     @Id
     private int id;
     private String name;

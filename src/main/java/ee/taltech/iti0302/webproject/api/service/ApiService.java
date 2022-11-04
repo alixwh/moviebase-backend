@@ -1,11 +1,18 @@
 package ee.taltech.iti0302.webproject.api.service;
 
+import ee.taltech.iti0302.webproject.api.externaldto.ActorExternalDto;
+import ee.taltech.iti0302.webproject.api.externaldto.DirectorExternalDto;
 import ee.taltech.iti0302.webproject.api.externaldto.GenreExternalDto;
 import ee.taltech.iti0302.webproject.api.externaldto.MovieExternalDto;
+import ee.taltech.iti0302.webproject.api.externallistdto.CreditsListDto;
 import ee.taltech.iti0302.webproject.api.externallistdto.GenreListExternalDto;
 import ee.taltech.iti0302.webproject.api.externallistdto.MovieListExternalDto;
+import ee.taltech.iti0302.webproject.api.mappper.ActorExternalMapper;
+import ee.taltech.iti0302.webproject.api.mappper.DirectorExternalMapper;
 import ee.taltech.iti0302.webproject.api.mappper.GenreExternalMapper;
 import ee.taltech.iti0302.webproject.api.mappper.MovieExternalMapper;
+import ee.taltech.iti0302.webproject.entities.Actor;
+import ee.taltech.iti0302.webproject.entities.Director;
 import ee.taltech.iti0302.webproject.entities.Genre;
 import ee.taltech.iti0302.webproject.entities.Movie;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +28,13 @@ public class ApiService {
     private static final String API_KEY = "ee997f75fb7f7e80dc5adc5aabac24ff";
     private final MovieExternalService movieExternalService;
     private final GenreExternalService genreExternalService;
+    private final ActorExternalService actorExternalService;
+    private final DirectorExternalService directorExternalService;
     private final MovieExternalMapper movieExternalMapper;
     private final GenreExternalMapper genreExternalMapper;
+    private final ActorExternalMapper actorExternalMapper;
+    private final DirectorExternalMapper directorExternalMapper;
+
 
     public void saveGenres() {
         RestTemplate restTemplate = new RestTemplate();
@@ -48,11 +60,37 @@ public class ApiService {
                 movie.setGenres(genres);
                 Integer movieId = movieExternalDto.getId();
                 if (!movieExternalService.isInDatabase(movieId)) {
-                    //saveCredits(movieId, movieExternalDto);
+                    saveCredits(movieId, movie);
                     movieExternalService.save(movie);
                 }
             }
         }
     }
 
+    public void saveCredits(Integer movieId, Movie movie) {
+        RestTemplate restTemplate = new RestTemplate();
+        String resourceUrl = String.format("https://api.themoviedb.org/3/movie/%1$s/credits?api_key=%2$s&language=en-US", movieId, API_KEY);
+        CreditsListDto response = restTemplate.getForObject(resourceUrl, CreditsListDto.class);
+        int i = 0;
+        Set<Actor> actors = new HashSet<>();
+        for (ActorExternalDto actorExternalDto: response.getCast()) {
+            if(i > 20) {
+                break;
+            }
+            Actor actor = actorExternalMapper.actorExternalDtoToActor(actorExternalDto);
+            actorExternalService.save(actor);
+            actors.add(actor);
+            i++;
+        }
+        movie.setActors(actors);
+        Set<Director> directors = new HashSet<>();
+        for (DirectorExternalDto crewMemberDto: response.getCrew()) {
+            if (crewMemberDto.getJob().equals("Director")) {
+                Director director = directorExternalMapper.directorExternalDtoToDirector(crewMemberDto);
+                directorExternalService.save(director);
+                directors.add(director);
+            }
+        }
+        movie.setDirectors(directors);
+    }
 }
