@@ -12,6 +12,7 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface GenreMapper {
     @Mapping(source = "movies", target = "moviesList")
+
     GenreDto toDto(Genre genre);
 
     default String mapToMovieTitle(Movie movie) {
@@ -19,5 +20,4 @@ public interface GenreMapper {
     }
 
     List<GenreDto> toDtoList(List<Genre> genres);
-
 }

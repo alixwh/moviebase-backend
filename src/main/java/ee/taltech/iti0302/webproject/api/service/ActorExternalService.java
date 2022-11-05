@@ -1,23 +1,14 @@
-package ee.taltech.iti0302.webproject.service;
+package ee.taltech.iti0302.webproject.api.service;
 
-import ee.taltech.iti0302.webproject.dto.ActorDto;
 import ee.taltech.iti0302.webproject.entities.Actor;
-import ee.taltech.iti0302.webproject.mapper.ActorMapper;
 import ee.taltech.iti0302.webproject.repository.ActorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @Service
-public class ActorService {
+public class ActorExternalService {
     private final ActorRepository actorRepository;
-    private final ActorMapper actorMapper;
-
-    public List<ActorDto> findAll() {
-        return actorMapper.toDtoList(actorRepository.findAll());
-    }
 
     public void save(Actor actor) {
         actorRepository.save(actor);

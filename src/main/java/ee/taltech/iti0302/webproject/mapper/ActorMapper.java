@@ -14,6 +14,7 @@ import java.util.List;
 public interface ActorMapper {
 
     @Mapping(source = "movies", target = "actorMovies")
+
     ActorDto toDto(Actor actor);
 
     default String mapToMovieTitle(Movie movie) {

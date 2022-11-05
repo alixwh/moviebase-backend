@@ -144,4 +144,31 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet  id="20221101-1"  author="hahinn">
+        <modifyDataType tableName="movie" columnName="year" newDataType="text"/>
+        <sql>
+            alter table movie alter column id drop identity;
+            alter table actor alter column id drop identity;
+            alter table genre alter column id drop identity;
+            alter table director alter column id drop identity;
+        </sql>
+    </changeSet>
+    <changeSet  id="20221101-2"  author="hahinn">
+        <modifyDataType tableName="movie" columnName="year" newDataType="date"/>
+        <renameColumn columnDataType="text"
+                      newColumnName="overview"
+                      oldColumnName="description"
+                      schemaName="public"
+                      tableName="movie"/>
+        <renameColumn columnDataType="date"
+                      newColumnName="release_date"
+                      oldColumnName="year"
+                      schemaName="public"
+                      tableName="movie"/>
+        <renameColumn columnDataType="float"
+                      newColumnName="vote_average"
+                      oldColumnName="rating"
+                      schemaName="public"
+                      tableName="movie"/>
+    </changeSet>
 </databaseChangeLog>

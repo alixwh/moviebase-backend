@@ -11,7 +11,6 @@ import java.util.Set;
 @Entity
 public class Actor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
 

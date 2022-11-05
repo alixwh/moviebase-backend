@@ -1,6 +1,7 @@
 package ee.taltech.iti0302.webproject.service;
 
 import ee.taltech.iti0302.webproject.dto.GenreDto;
+import ee.taltech.iti0302.webproject.entities.Genre;
 import ee.taltech.iti0302.webproject.mapper.GenreMapper;
 import ee.taltech.iti0302.webproject.repository.GenreRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +19,11 @@ public class GenreService {
         return genreMapper.toDto(genreRepository.findById(id).orElse(null));
     }
 
+    public Genre findGenreById(int id) {
+        return genreRepository.findById(id).orElse(null);
+    }
+
     public List<GenreDto> findAll() {
         return genreMapper.toDtoList(genreRepository.findAll());
     }
-
 }

@@ -13,6 +13,7 @@ import java.util.List;
 public interface AccountMapper {
     @Mapping(source = "movies", target = "moviesList")
     @Mapping(source = "friends", target = "friendList")
+
     AccountDto toDto(Account account);
 
     default String mapToMovieTitle(Movie movie) {
@@ -24,5 +25,4 @@ public interface AccountMapper {
     }
 
     List<AccountDto> toDtoList(List<Account> accounts);
-
 }
