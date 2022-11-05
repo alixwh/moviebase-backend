@@ -94,4 +94,23 @@ public class ApiService {
         }
         movie.setDirectors(directors);
     }
+
+    public void saveMovie(String movieName) {
+        RestTemplate restTemplate = new RestTemplate();
+        String resourceUrl = String.format("https://api.themoviedb.org/3/search/movie?api_key=%1$s&query=%2$s", API_KEY, movieName);
+        MovieListExternalDto response = restTemplate.getForObject(resourceUrl, MovieListExternalDto.class);
+        for (MovieExternalDto movieExternalDto: Objects.requireNonNull(response).getResults()) {
+            Set<Genre> genres = new HashSet<>();
+            for(Integer genreId: movieExternalDto.getGenreIds()) {
+                genres.add(genreExternalService.findById(genreId));
+            }
+            Movie movie = movieExternalMapper.movieExternalDtoToMovie(movieExternalDto);
+            movie.setGenres(genres);
+            Integer movieId = movieExternalDto.getId();
+            if (!movieExternalService.isInDatabase(movieId)) {
+                saveCredits(movieId, movie);
+                movieExternalService.save(movie);
+            }
+        }
+    }
 }

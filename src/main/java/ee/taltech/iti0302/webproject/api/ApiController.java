@@ -22,4 +22,9 @@ public class ApiController {
     public void saveMovies(@PathVariable("limit") Integer limit) {
         apiService.saveMovies(limit);
     }
+
+    @PostMapping("save/movie/{movieName}")
+    public void saveMovie(@PathVariable("movieName") String movieName) {
+        apiService.saveMovie(movieName);
+    }
 }
