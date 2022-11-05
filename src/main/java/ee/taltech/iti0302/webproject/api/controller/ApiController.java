@@ -1,4 +1,4 @@
-package ee.taltech.iti0302.webproject.api;
+package ee.taltech.iti0302.webproject.api.controller;
 
 import ee.taltech.iti0302.webproject.api.service.ApiService;
 import lombok.RequiredArgsConstructor;
