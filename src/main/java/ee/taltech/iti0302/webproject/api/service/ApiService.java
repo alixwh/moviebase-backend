@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @RequiredArgsConstructor
@@ -40,7 +41,7 @@ public class ApiService {
         RestTemplate restTemplate = new RestTemplate();
         String resourceUrl = String.format("https://api.themoviedb.org/3/genre/movie/list?api_key=%s&language=en-US", API_KEY);
         GenreListExternalDto response = restTemplate.getForObject(resourceUrl, GenreListExternalDto.class);
-        for (GenreExternalDto genreExternalDto: response.getGenres()) {
+        for (GenreExternalDto genreExternalDto: Objects.requireNonNull(response).getGenres()) {
             Genre genre = genreExternalMapper.genreExternalDtoToGenre(genreExternalDto);
             genreExternalService.save(genre);
         }
@@ -51,7 +52,7 @@ public class ApiService {
         for (int i = 1; i <= limit && i < 500; i++) {
             String resourceUrl = String.format("https://api.themoviedb.org/3/movie/popular?api_key=%1$s&language=en-US&page=%2$s", API_KEY, i);
             MovieListExternalDto response = restTemplate.getForObject(resourceUrl, MovieListExternalDto.class);
-            for (MovieExternalDto movieExternalDto: response.getResults()) {
+            for (MovieExternalDto movieExternalDto: Objects.requireNonNull(response).getResults()) {
                 Set<Genre> genres = new HashSet<>();
                 for(Integer genreId: movieExternalDto.getGenreIds()) {
                     genres.add(genreExternalService.findById(genreId));
@@ -73,7 +74,7 @@ public class ApiService {
         CreditsListDto response = restTemplate.getForObject(resourceUrl, CreditsListDto.class);
         int i = 0;
         Set<Actor> actors = new HashSet<>();
-        for (ActorExternalDto actorExternalDto: response.getCast()) {
+        for (ActorExternalDto actorExternalDto: Objects.requireNonNull(response).getCast()) {
             if(i > 20) {
                 break;
             }

@@ -13,22 +13,26 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MovieMapper {
-    // Genre to movie
     @Mapping(source = "genres", target = "genresList")
+    @Mapping(source = "actors", target = "actorsList")
+    @Mapping(source = "directors", target = "directorsList")
+    MovieDto toDto(Movie movie);
+
+    // Genre to movie
     default String mapToGenreName(Genre genre) {
         return genre.getName();
     }
+
     // Actors to movie
-    @Mapping(source = "actors", target = "actorsList")
     default String mapToActorName(Actor actor) {
         return actor.getName();
     }
+
     // Directors to movie
-    @Mapping(source = "directors", target = "directorsList")
     default String mapToDirectorName(Director director) {
         return director.getName();
     }
 
-    MovieDto toDto(Movie movie);
     List<MovieDto> toDtoList(List<Movie> movies);
+
 }
