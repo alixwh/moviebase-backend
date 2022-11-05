@@ -1,4 +1,4 @@
-package ee.taltech.iti0302.webproject.api;
+package ee.taltech.iti0302.webproject.api.controller;
 
 import ee.taltech.iti0302.webproject.api.service.ApiService;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +21,10 @@ public class ApiController {
     @PostMapping("save/movies/{limit}")
     public void saveMovies(@PathVariable("limit") Integer limit) {
         apiService.saveMovies(limit);
+    }
+
+    @PostMapping("save/movie/{movieName}")
+    public void saveMovie(@PathVariable("movieName") String movieName) {
+        apiService.saveMovie(movieName);
     }
 }
