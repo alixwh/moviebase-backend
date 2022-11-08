@@ -1,6 +1,7 @@
 package ee.taltech.iti0302.webproject.controller;
 
 import ee.taltech.iti0302.webproject.dto.GenreDto;
+import ee.taltech.iti0302.webproject.dto.MovieDto;
 import ee.taltech.iti0302.webproject.service.GenreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,5 +25,10 @@ public class GenreController {
     @GetMapping("genres")
     public List<GenreDto> getGenres() {
         return genreService.findAll();
+    }
+
+    @GetMapping("genre/{id}")
+    public List<MovieDto> getMoviesByCategory(@PathVariable("id") int genreId) {
+        return genreService.findMoviesByGenreId(genreId);
     }
 }
