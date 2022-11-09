@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import java.util.Set;
+import java.util.List;
 
 @Getter @Setter
 @Entity
@@ -16,5 +16,5 @@ public class Genre {
     private String name;
 
     @ManyToMany(mappedBy = "genres")
-    private Set<Movie> movies;
+    private List<Movie> movies;
 }
