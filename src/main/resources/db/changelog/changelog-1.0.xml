@@ -171,4 +171,10 @@
                       schemaName="public"
                       tableName="movie"/>
     </changeSet>
+    <changeSet  id="20221109-1"  author="brkerg">
+        <addColumn tableName="account">
+            <column name="account_role" type="text"/>
+            <column name="locked" type="boolean"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
