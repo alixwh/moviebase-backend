@@ -12,7 +12,6 @@ public class RegistrationService {
     private final AccountLoginService accountLoginService;
 
     public String register(RegistrationRequest request) {
-        System.out.println(request);
         return accountLoginService.signUpAccount(
                 new AccountLoginDto(request.getUsername(),
                         request.getPassword(),
