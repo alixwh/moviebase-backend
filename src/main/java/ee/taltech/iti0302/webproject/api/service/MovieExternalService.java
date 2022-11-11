@@ -61,6 +61,8 @@ public class MovieExternalService {
         for (MovieExternalDto movieExternalDto: Objects.requireNonNull(response).getResults()) {
             Set<Genre> genres = genreExternalService.getGenresByIds(movieExternalDto.getGenreIds());
             Movie movie = movieExternalMapper.movieExternalDtoToMovie(movieExternalDto);
+            String posterPath = movieExternalDto.getPosterPath();
+            movie.setPosterPath(posterPath);
             movie.setGenres(genres);
             Integer movieId = movieExternalDto.getId();
             if (!isInDatabase(movieId)) {

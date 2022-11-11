@@ -16,6 +16,7 @@ public class Movie {
     private String overview;
     private LocalDate releaseDate;
     private double voteAverage;
+    private String posterPath;
 
     @ManyToMany
     @JoinTable(name = "movie_genre", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))
