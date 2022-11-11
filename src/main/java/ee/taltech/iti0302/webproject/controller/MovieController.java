@@ -29,6 +29,10 @@ public class MovieController {
         return movieService.findAll();
     }
 
+    @GetMapping("movies/year/{releaseYear}")
+    public List<MovieDto> getMoviesByReleaseYear(@PathVariable("releaseYear") int year) {
+        return movieService.findByYear(year);
+
     @GetMapping("actor/{id}")
     public List<MovieDto> getMoviesByActor(@PathVariable("id") int actorId) {
         return actorService.findMoviesByActorId(actorId);
