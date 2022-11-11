@@ -30,7 +30,8 @@ public class Account implements UserDetails {
 
     @ManyToMany
     @JoinTable(name = "account_movie", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
-    private Set<Movie> movies;
+    transient Set<Movie> movies;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(accountRole.name());

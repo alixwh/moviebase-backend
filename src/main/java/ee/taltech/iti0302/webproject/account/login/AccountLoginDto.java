@@ -1,5 +1,6 @@
-package ee.taltech.iti0302.webproject.account;
+package ee.taltech.iti0302.webproject.account.login;
 
+import ee.taltech.iti0302.webproject.account.AccountRole;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

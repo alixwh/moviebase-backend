@@ -1,6 +1,6 @@
 package ee.taltech.iti0302.webproject.account;
 
 public enum AccountRole {
-    USER,
-    ADMIN
+    ROLE_USER,
+    ROLE_ADMIN
 }
