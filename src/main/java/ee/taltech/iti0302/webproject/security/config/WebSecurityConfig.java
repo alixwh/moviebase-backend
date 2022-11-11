@@ -22,12 +22,12 @@ public class WebSecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests( auth -> auth
-                        .anyRequest().permitAll());
+                        .anyRequest().permitAll())
 //                .mvcMatchers("/api/registration/**").permitAll()
 //                .mvcMatchers("/api/**").hasRole("ADMIN")
 //                .anyRequest().authenticated());
 //                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .formLogin();
+                .formLogin();
         http.authenticationProvider(daoAuthenticationProvider());
         return http.build();
     }
