@@ -2,6 +2,7 @@ package ee.taltech.iti0302.webproject.controller;
 
 import ee.taltech.iti0302.webproject.dto.MovieDto;
 import ee.taltech.iti0302.webproject.service.ActorService;
+import ee.taltech.iti0302.webproject.service.GenreService;
 import ee.taltech.iti0302.webproject.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ public class MovieController {
 
     private final MovieService movieService;
     private final ActorService actorService;
+    private final GenreService genreService;
 
     @GetMapping("movies/{id}")
     public MovieDto getMovieById(@PathVariable("id") int id) {
@@ -37,5 +39,10 @@ public class MovieController {
     @GetMapping("actor/{id}")
     public List<MovieDto> getMoviesByActor(@PathVariable("id") int actorId) {
         return actorService.findMoviesByActorId(actorId);
+    }
+
+    @GetMapping("genre/{id}")
+    public List<MovieDto> getMoviesByCategory(@PathVariable("id") int genreId) {
+        return genreService.findMoviesByGenreId(genreId);
     }
 }
