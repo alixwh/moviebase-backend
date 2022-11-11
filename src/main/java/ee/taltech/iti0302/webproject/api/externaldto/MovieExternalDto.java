@@ -12,6 +12,8 @@ public class MovieExternalDto {
     private int id;
     private String title;
     private String overview;
+    @JsonProperty("poster_path")
+    private String posterPath;
     @JsonProperty("release_date")
     private LocalDate releaseDate;
     @JsonProperty("vote_average")

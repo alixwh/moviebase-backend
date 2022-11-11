@@ -177,4 +177,11 @@
             <column name="locked" type="boolean"/>
         </addColumn>
     </changeSet>
+    <changeSet id="20221111-1" author="hahinn">
+        <addColumn tableName="movie">
+            <column name="poster_path"  type="text">
+                <constraints  nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

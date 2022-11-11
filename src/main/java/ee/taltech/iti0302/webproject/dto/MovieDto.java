@@ -13,6 +13,7 @@ public class MovieDto {
     private String overview;
     private LocalDate releaseDate;
     private double voteAverage;
+    private String posterPath;
     private Set<String> genresList;
     private Set<String> actorsList;
     private Set<String> directorsList;
