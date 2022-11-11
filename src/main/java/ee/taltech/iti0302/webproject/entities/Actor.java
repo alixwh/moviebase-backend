@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,5 +15,5 @@ public class Actor {
     private String name;
 
     @ManyToMany(mappedBy = "actors")
-    private Set<Movie> movies;
+    private List<Movie> movies;
 }
