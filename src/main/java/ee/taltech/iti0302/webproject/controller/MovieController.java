@@ -1,6 +1,7 @@
 package ee.taltech.iti0302.webproject.controller;
 
 import ee.taltech.iti0302.webproject.dto.MovieDto;
+import ee.taltech.iti0302.webproject.service.ActorService;
 import ee.taltech.iti0302.webproject.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import java.util.List;
 public class MovieController {
 
     private final MovieService movieService;
+    private final ActorService actorService;
 
     @GetMapping("movies/{id}")
     public MovieDto getMovieById(@PathVariable("id") int id) {
@@ -30,5 +32,9 @@ public class MovieController {
     @GetMapping("movies/year/{releaseYear}")
     public List<MovieDto> getMoviesByReleaseYear(@PathVariable("releaseYear") int year) {
         return movieService.findByYear(year);
+
+    @GetMapping("actor/{id}")
+    public List<MovieDto> getMoviesByActor(@PathVariable("id") int actorId) {
+        return actorService.findMoviesByActorId(actorId);
     }
 }
