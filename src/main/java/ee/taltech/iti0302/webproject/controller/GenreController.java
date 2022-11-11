@@ -26,9 +26,4 @@ public class GenreController {
     public List<GenreDto> getGenres() {
         return genreService.findAll();
     }
-
-    @GetMapping("genre/{id}")
-    public List<MovieDto> getMoviesByCategory(@PathVariable("id") int genreId) {
-        return genreService.findMoviesByGenreId(genreId);
-    }
 }
