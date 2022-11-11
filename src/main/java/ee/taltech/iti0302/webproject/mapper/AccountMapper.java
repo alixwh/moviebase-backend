@@ -11,9 +11,9 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AccountMapper {
+
     @Mapping(source = "movies", target = "moviesList")
     @Mapping(source = "friends", target = "friendList")
-
     AccountDto toDto(Account account);
 
     default String mapToMovieTitle(Movie movie) {

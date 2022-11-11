@@ -21,4 +21,5 @@ public class AccountService {
     public AccountDto findById(int id) {
         return accountMapper.toDto(accountRepository.findById(id).orElse(null));
     }
+
 }
