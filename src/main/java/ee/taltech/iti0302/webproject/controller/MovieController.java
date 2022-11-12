@@ -1,5 +1,6 @@
 package ee.taltech.iti0302.webproject.controller;
 
+import ee.taltech.iti0302.webproject.api.service.MovieExternalService;
 import ee.taltech.iti0302.webproject.dto.MovieDto;
 import ee.taltech.iti0302.webproject.service.ActorService;
 import ee.taltech.iti0302.webproject.service.GenreService;
@@ -44,5 +45,10 @@ public class MovieController {
     @GetMapping("genre/{id}")
     public List<MovieDto> getMoviesByCategory(@PathVariable("id") int genreId) {
         return genreService.findMoviesByGenreId(genreId);
+    }
+
+    @GetMapping("search/{movieName}")
+    public List<MovieDto> getMoviesByName(@PathVariable("movieName") String movieName) {
+        return movieService.findByName(movieName);
     }
 }

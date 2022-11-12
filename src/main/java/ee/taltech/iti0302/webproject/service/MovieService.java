@@ -1,6 +1,8 @@
 package ee.taltech.iti0302.webproject.service;
 
+import ee.taltech.iti0302.webproject.api.service.MovieExternalService;
 import ee.taltech.iti0302.webproject.dto.MovieDto;
+import ee.taltech.iti0302.webproject.entities.Movie;
 import ee.taltech.iti0302.webproject.mapper.MovieMapper;
 import ee.taltech.iti0302.webproject.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
 @RequiredArgsConstructor
 @Service
 public class MovieService {
+    private final MovieExternalService movieExternalService;
     private final MovieRepository movieRepository;
     private final MovieMapper movieMapper;
 
@@ -31,5 +34,13 @@ public class MovieService {
         LocalDate startDate = instance.with(firstDayOfYear());
         LocalDate endDate = instance.with(lastDayOfYear());
         return movieMapper.toDtoList(movieRepository.findByReleaseDateBetween(startDate, endDate));
+    }
+
+    public List<MovieDto> findByName(String movieName) {
+        List<Movie> moviesWithGivenName = movieRepository.findByTitleContainingIgnoreCase(movieName);
+        if (moviesWithGivenName.size() < 1) {
+            moviesWithGivenName = movieExternalService.saveMoviesByName(movieName);
+        }
+        return movieMapper.toDtoList(moviesWithGivenName);
     }
 }
