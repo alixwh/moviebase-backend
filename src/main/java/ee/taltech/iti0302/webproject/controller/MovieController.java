@@ -1,14 +1,12 @@
 package ee.taltech.iti0302.webproject.controller;
 
+import ee.taltech.iti0302.webproject.api.service.MovieExternalService;
 import ee.taltech.iti0302.webproject.dto.MovieDto;
 import ee.taltech.iti0302.webproject.service.ActorService;
 import ee.taltech.iti0302.webproject.service.GenreService;
 import ee.taltech.iti0302.webproject.service.MovieService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,5 +42,10 @@ public class MovieController {
     @GetMapping("genre/{id}")
     public List<MovieDto> getMoviesByCategory(@PathVariable("id") int genreId) {
         return genreService.findMoviesByGenreId(genreId);
+    }
+
+    @GetMapping("search")
+    public List<MovieDto> getMoviesByName(@RequestParam("query") String movieName) {
+        return movieService.findByName(movieName);
     }
 }

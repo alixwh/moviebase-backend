@@ -17,9 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -41,11 +39,11 @@ public class MovieExternalService {
         movieRepository.save(movie);
     }
 
-    public void saveMoviesByName(String movieName) {
+    public List<Movie> saveMoviesByName(String movieName) {
         RestTemplate restTemplate = new RestTemplate();
         String resourceUrl = String.format("https://api.themoviedb.org/3/search/movie?api_key=%1$s&query=%2$s", API_KEY, movieName);
         MovieListExternalDto response = restTemplate.getForObject(resourceUrl, MovieListExternalDto.class);
-        saveMovies(response);
+        return saveMovies(response);
     }
 
     public void savePopularMovies(int limit) {
@@ -57,7 +55,8 @@ public class MovieExternalService {
         }
     }
 
-    public void saveMovies(MovieListExternalDto response) {
+    public List<Movie> saveMovies(MovieListExternalDto response) {
+        List<Movie> savedMovies = new ArrayList<>();
         for (MovieExternalDto movieExternalDto: Objects.requireNonNull(response).getResults()) {
             Set<Genre> genres = genreExternalService.getGenresByIds(movieExternalDto.getGenreIds());
             Movie movie = movieExternalMapper.movieExternalDtoToMovie(movieExternalDto);
@@ -68,14 +67,17 @@ public class MovieExternalService {
             if (!isInDatabase(movieId)) {
                 saveCredits(movieId, movie);
                 save(movie);
+                savedMovies.add(movie);
             }
         }
+        return savedMovies;
     }
 
     public void saveCredits(Integer movieId, Movie movie) {
         RestTemplate restTemplate = new RestTemplate();
         String resourceUrl = String.format("https://api.themoviedb.org/3/movie/%1$s/credits?api_key=%2$s&language=en-US", movieId, API_KEY);
         CreditsListDto response = restTemplate.getForObject(resourceUrl, CreditsListDto.class);
+        System.out.println(movieId);
         saveActors(response, movie);
         saveDirectors(response, movie);
     }
@@ -83,6 +85,7 @@ public class MovieExternalService {
     public void saveActors(CreditsListDto response, Movie movie) {
         int i = 0;
         Set<Actor> actors = new HashSet<>();
+        System.out.println(response.getCast());
         for (ActorExternalDto actorExternalDto: Objects.requireNonNull(response).getCast()) {
             if(i > 20) {
                 break;

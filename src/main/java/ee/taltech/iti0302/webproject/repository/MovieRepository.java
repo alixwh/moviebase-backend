@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface MovieRepository extends JpaRepositoryImplementation<Movie, Integer> {
     List<Movie> findByReleaseDateBetween(LocalDate startDate, LocalDate endDate);
+    List<Movie> findByTitleContainingIgnoreCase(String movieName);
 }
