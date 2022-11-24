@@ -1,13 +1,14 @@
 package ee.taltech.iti0302.webproject.controller;
 
+import ee.taltech.iti0302.webproject.account.login.LoginRequest;
+import ee.taltech.iti0302.webproject.account.login.LoginResponse;
+import ee.taltech.iti0302.webproject.account.register.CreateAccountRequest;
 import ee.taltech.iti0302.webproject.dto.AccountDto;
 import ee.taltech.iti0302.webproject.service.AccountService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -22,8 +23,18 @@ public class AccountController {
         return accountService.findById(id);
     }
 
-    @GetMapping("accounts")
-    public List<AccountDto> getAccounts() {
+    @GetMapping("account")
+    public List<AccountDto> getAccounts(Principal principal) {
         return accountService.findAll();
+    }
+
+    @PostMapping("public/register")
+    public void createAccount(@RequestBody CreateAccountRequest createAccountRequest) {
+        accountService.createAccount(createAccountRequest);
+    }
+
+    @PostMapping("public/login")
+    public LoginResponse login(@RequestBody LoginRequest loginRequest) {
+        return accountService.login(loginRequest.getUsername(), loginRequest.getPassword());
     }
 }

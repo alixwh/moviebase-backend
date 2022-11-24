@@ -1,5 +1,6 @@
 package ee.taltech.iti0302.webproject.mapper;
 
+import ee.taltech.iti0302.webproject.account.register.CreateAccountRequest;
 import ee.taltech.iti0302.webproject.dto.AccountDto;
 import ee.taltech.iti0302.webproject.entities.Account;
 import ee.taltech.iti0302.webproject.entities.Movie;
@@ -25,4 +26,6 @@ public interface AccountMapper {
     }
 
     List<AccountDto> toDtoList(List<Account> accounts);
+
+    Account toEntity(CreateAccountRequest createAccountRequest);
 }
