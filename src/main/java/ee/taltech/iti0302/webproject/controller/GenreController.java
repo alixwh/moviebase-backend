@@ -1,7 +1,6 @@
 package ee.taltech.iti0302.webproject.controller;
 
 import ee.taltech.iti0302.webproject.dto.GenreDto;
-import ee.taltech.iti0302.webproject.dto.MovieDto;
 import ee.taltech.iti0302.webproject.service.GenreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("api")
+@RequestMapping("api/public")
 @RestController
 public class GenreController {
     private final GenreService genreService;

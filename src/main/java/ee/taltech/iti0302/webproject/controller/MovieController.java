@@ -1,6 +1,5 @@
 package ee.taltech.iti0302.webproject.controller;
 
-import ee.taltech.iti0302.webproject.api.service.MovieExternalService;
 import ee.taltech.iti0302.webproject.dto.MovieDto;
 import ee.taltech.iti0302.webproject.service.ActorService;
 import ee.taltech.iti0302.webproject.service.GenreService;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("api")
+@RequestMapping("api/public")
 @RestController
 public class MovieController {
 
