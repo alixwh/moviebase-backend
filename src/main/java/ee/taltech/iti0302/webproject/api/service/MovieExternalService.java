@@ -77,17 +77,15 @@ public class MovieExternalService {
         RestTemplate restTemplate = new RestTemplate();
         String resourceUrl = String.format("https://api.themoviedb.org/3/movie/%1$s/credits?api_key=%2$s&language=en-US", movieId, API_KEY);
         CreditsListDto response = restTemplate.getForObject(resourceUrl, CreditsListDto.class);
-        System.out.println(movieId);
         saveActors(response, movie);
         saveDirectors(response, movie);
     }
 
     public void saveActors(CreditsListDto response, Movie movie) {
         int i = 0;
-        Set<Actor> actors = new HashSet<>();
-        System.out.println(response.getCast());
+        List<Actor> actors = new ArrayList<>();
         for (ActorExternalDto actorExternalDto: Objects.requireNonNull(response).getCast()) {
-            if(i > 20) {
+            if(i >= 20) {
                 break;
             }
             Actor actor = actorExternalMapper.actorExternalDtoToActor(actorExternalDto);

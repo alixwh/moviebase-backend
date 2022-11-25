@@ -24,8 +24,8 @@ public interface MovieMapper {
     }
 
     // Actors to movie
-    default String mapToActorName(Actor actor) {
-        return actor.getName();
+    default int mapToActorName(Actor actor) {
+        return actor.getId();
     }
 
     // Directors to movie

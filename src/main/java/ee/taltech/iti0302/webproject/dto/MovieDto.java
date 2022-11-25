@@ -4,6 +4,7 @@ package ee.taltech.iti0302.webproject.dto;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -15,6 +16,6 @@ public class MovieDto {
     private double voteAverage;
     private String posterPath;
     private Set<String> genresList;
-    private Set<String> actorsList;
+    private List<Integer> actorsList;
     private Set<String> directorsList;
 }
