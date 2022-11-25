@@ -3,6 +3,7 @@ package ee.taltech.iti0302.webproject.controller;
 import ee.taltech.iti0302.webproject.account.login.LoginRequest;
 import ee.taltech.iti0302.webproject.account.login.LoginResponse;
 import ee.taltech.iti0302.webproject.account.register.CreateAccountRequest;
+import ee.taltech.iti0302.webproject.account.register.RegisterResponse;
 import ee.taltech.iti0302.webproject.dto.AccountDto;
 import ee.taltech.iti0302.webproject.service.AccountService;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +30,8 @@ public class AccountController {
     }
 
     @PostMapping("public/register")
-    public void createAccount(@RequestBody CreateAccountRequest createAccountRequest) {
-        accountService.createAccount(createAccountRequest);
+    public RegisterResponse createAccount(@RequestBody CreateAccountRequest createAccountRequest) {
+        return accountService.createAccount(createAccountRequest);
     }
 
     @PostMapping("public/login")

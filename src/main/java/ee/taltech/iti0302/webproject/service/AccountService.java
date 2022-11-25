@@ -3,6 +3,7 @@ package ee.taltech.iti0302.webproject.service;
 import ee.taltech.iti0302.webproject.account.AccountRole;
 import ee.taltech.iti0302.webproject.account.login.LoginResponse;
 import ee.taltech.iti0302.webproject.account.register.CreateAccountRequest;
+import ee.taltech.iti0302.webproject.account.register.RegisterResponse;
 import ee.taltech.iti0302.webproject.dto.AccountDto;
 import ee.taltech.iti0302.webproject.entities.Account;
 import ee.taltech.iti0302.webproject.mapper.AccountMapper;
@@ -31,13 +32,16 @@ public class AccountService {
         return accountMapper.toDto(accountRepository.findById(id).orElse(null));
     }
 
-    public void createAccount(CreateAccountRequest createAccountRequest) {
+    public RegisterResponse createAccount(CreateAccountRequest createAccountRequest) {
         Account account = accountMapper.toEntity(createAccountRequest);
         account.setPassword(passwordEncoder.encode(createAccountRequest.getPassword()));
         account.setAccountRole(AccountRole.ROLE_USER);
 
         // TODO throw exception if name exist already
+
         accountRepository.save(account);
+        // very temporary thing: !!!
+        return new RegisterResponse("register successful");
     }
 
     public LoginResponse login(String username, String password) {
