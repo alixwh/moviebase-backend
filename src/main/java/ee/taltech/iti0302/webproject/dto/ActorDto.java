@@ -8,4 +8,5 @@ public class ActorDto {
     private int id;
     private String name;
     private Set<String> actorMovies;
+    private String profilePath;
 }

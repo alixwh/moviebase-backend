@@ -13,6 +13,7 @@ public class Actor {
     @Id
     private int id;
     private String name;
+    private String profilePath;
 
     @ManyToMany(mappedBy = "actors")
     private List<Movie> movies;
