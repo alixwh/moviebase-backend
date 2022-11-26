@@ -184,4 +184,9 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="20221125-1" author="hahinn">
+        <addColumn tableName="actor">
+            <column name="profile_path"  type="text" />
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
