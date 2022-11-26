@@ -35,7 +35,7 @@ public class MovieController {
     }
 
     @GetMapping("movies/years/{years}")
-    public List<MovieDto> getMoviesMultipleYears(@PathVariable("years") int[] years) {
+    public List<MovieDto> getMoviesMultipleYears(@PathVariable("years") List<Integer> years) {
         return movieService.findByMultipleYears(years);
     }
 
@@ -44,7 +44,7 @@ public class MovieController {
         return actorService.findMoviesByActorId(actorId);
     }
 
-    @GetMapping("movies/genre/{id}")
+    @GetMapping("genre/{id}")
     public List<MovieDto> getMoviesByCategory(@PathVariable("id") int genreId) {
         return genreService.findMoviesByGenreId(genreId);
     }
@@ -58,8 +58,8 @@ public class MovieController {
         return genreService.findMoviesByMultipleGenreIds(genres);
     }
 
-    @GetMapping("movies/years/{years}/genres{genres}")
-    public Set<MovieDto> getMoviesByYearsAndGenres(@PathVariable("years") List<Integer> years, @PathVariable("genres") int[] genres) {
+    @GetMapping("filter")
+    public List<MovieDto> getMoviesByYearsAndGenres(@RequestParam(value="genre", required=false) List<Integer> genres, @RequestParam(value="year", required = false) List<Integer> years) {
         return movieService.findByMultipleYearsAndGenres(years, genres);
     }
 }
