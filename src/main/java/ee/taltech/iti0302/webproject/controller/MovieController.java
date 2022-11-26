@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @RequestMapping("api/public")
@@ -33,6 +34,11 @@ public class MovieController {
         return movieService.findByYear(year);
     }
 
+    @GetMapping("movies/years/{years}")
+    public List<MovieDto> getMoviesMultipleYears(@PathVariable("years") int[] years) {
+        return movieService.findByMultipleYears(years);
+    }
+
     @GetMapping("movies/actor/{id}")
     public List<MovieDto> getMoviesByActor(@PathVariable("id") int actorId) {
         return actorService.findMoviesByActorId(actorId);
@@ -46,5 +52,14 @@ public class MovieController {
     @GetMapping("search")
     public List<MovieDto> getMoviesByName(@RequestParam("query") String movieName) {
         return movieService.findByName(movieName);
+    }
+    @GetMapping("movies/genres/{genreIds}")
+    public Set<MovieDto> getMoviesMultipleGenres(@PathVariable("genreIds") int[] genres) {
+        return genreService.findMoviesByMultipleGenreIds(genres);
+    }
+
+    @GetMapping("movies/years/{years}/genres{genres}")
+    public Set<MovieDto> getMoviesByYearsAndGenres(@PathVariable("years") List<Integer> years, @PathVariable("genres") int[] genres) {
+        return movieService.findByMultipleYearsAndGenres(years, genres);
     }
 }
