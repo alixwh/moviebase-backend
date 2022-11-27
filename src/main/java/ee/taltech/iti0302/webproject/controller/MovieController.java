@@ -28,37 +28,28 @@ public class MovieController {
         return movieService.findAll();
     }
 
-    @GetMapping("movies/year/{releaseYear}")
-    public List<MovieDto> getMoviesByReleaseYear(@PathVariable("releaseYear") int year) {
-        return movieService.findByYear(year);
-    }
-
-    @GetMapping("movies/years/{years}")
-    public List<MovieDto> getMoviesMultipleYears(@PathVariable("years") List<Integer> years) {
-        return movieService.findByMultipleYears(years);
-    }
-
     @GetMapping("movies/actor/{id}")
     public List<MovieDto> getMoviesByActor(@PathVariable("id") int actorId) {
         return actorService.findMoviesByActorId(actorId);
     }
 
     @GetMapping("genre/{id}")
-    public List<MovieDto> getMoviesByCategory(@PathVariable("id") int genreId) {
+    public List<MovieDto> getMoviesByGenreId(@PathVariable("id") int genreId) {
         return genreService.findMoviesByGenreId(genreId);
+    }
+
+    @GetMapping("year/{releaseYear}")
+    public List<MovieDto> getMoviesByReleaseYear(@PathVariable("releaseYear") int year) {
+        return movieService.findByYear(year);
     }
 
     @GetMapping("search")
     public List<MovieDto> getMoviesByName(@RequestParam("query") String movieName) {
         return movieService.findByName(movieName);
     }
-    @GetMapping("movies/genres/{genreIds}")
-    public List<MovieDto> getMoviesMultipleGenres(@PathVariable("genreIds") List<Integer> genres) {
-        return movieService.findByMultipleGenres(genreService.findGenresByMultipleGenreIds(genres));
-    }
 
     @GetMapping("filter")
-    public List<MovieDto> getMoviesByYearsAndGenres(@RequestParam(value="genre", required=false) List<Integer> genres, @RequestParam(value="year", required = false) List<Integer> years) {
-        return movieService.findByMultipleYearsAndGenres(years, genres);
+    public List<MovieDto> getMoviesByYearsAndGenres(@RequestParam(required=false) List<Integer> genre, @RequestParam(required = false) List<Integer> year) {
+        return movieService.findByMultipleYearsAndGenres(year, genre);
     }
 }

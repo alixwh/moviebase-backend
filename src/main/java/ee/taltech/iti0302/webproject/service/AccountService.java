@@ -40,7 +40,7 @@ public class AccountService {
         // TODO throw exception if name exist already
 
         accountRepository.save(account);
-        // very temporary thing: !!!
+        // temporary !!!
         return new RegisterResponse("register successful");
     }
 
