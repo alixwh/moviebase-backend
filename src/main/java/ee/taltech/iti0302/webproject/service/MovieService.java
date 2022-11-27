@@ -2,6 +2,7 @@ package ee.taltech.iti0302.webproject.service;
 
 import ee.taltech.iti0302.webproject.api.service.MovieExternalService;
 import ee.taltech.iti0302.webproject.dto.MovieDto;
+import ee.taltech.iti0302.webproject.entities.Genre;
 import ee.taltech.iti0302.webproject.entities.Movie;
 import ee.taltech.iti0302.webproject.mapper.MovieMapper;
 import ee.taltech.iti0302.webproject.repository.MovieRepository;
@@ -25,6 +26,14 @@ public class MovieService {
         return movieMapper.toDto(movieRepository.findById(id).orElse(null));
     }
 
+    public List<MovieDto> findByName(String movieName) {
+        List<Movie> moviesWithGivenName = movieRepository.findByTitleContainingIgnoreCase(movieName);
+        if (moviesWithGivenName.isEmpty()) {
+            moviesWithGivenName = movieExternalService.saveMoviesByName(movieName);
+        }
+        return movieMapper.toDtoList(moviesWithGivenName);
+    }
+
     public List<MovieDto> findByYear(int year) {
         return movieMapper.toDtoList(movieRepository.findAllByReleaseDateYear(year));
     }
@@ -33,12 +42,8 @@ public class MovieService {
         return movieMapper.toDtoList(movieRepository.findAllByReleaseDateYearIn(years));
     }
 
-    public List<MovieDto> findByName(String movieName) {
-        List<Movie> moviesWithGivenName = movieRepository.findByTitleContainingIgnoreCase(movieName);
-        if (moviesWithGivenName.isEmpty()) {
-            moviesWithGivenName = movieExternalService.saveMoviesByName(movieName);
-        }
-        return movieMapper.toDtoList(moviesWithGivenName);
+    public List<MovieDto> findByMultipleGenres(List<Genre> genres) {
+        return movieMapper.toDtoList(movieRepository.findAllByGenresIn(genres));
     }
 
     public List<MovieDto> findByMultipleYearsAndGenres(List<Integer> years, List<Integer> genres) {

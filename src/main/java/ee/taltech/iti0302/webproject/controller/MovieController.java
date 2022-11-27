@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RequiredArgsConstructor
 @RequestMapping("api/public")
@@ -54,8 +53,8 @@ public class MovieController {
         return movieService.findByName(movieName);
     }
     @GetMapping("movies/genres/{genreIds}")
-    public Set<MovieDto> getMoviesMultipleGenres(@PathVariable("genreIds") int[] genres) {
-        return genreService.findMoviesByMultipleGenreIds(genres);
+    public List<MovieDto> getMoviesMultipleGenres(@PathVariable("genreIds") List<Integer> genres) {
+        return movieService.findByMultipleGenres(genreService.findGenresByMultipleGenreIds(genres));
     }
 
     @GetMapping("filter")

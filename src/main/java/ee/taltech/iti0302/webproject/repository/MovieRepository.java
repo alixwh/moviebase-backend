@@ -1,5 +1,6 @@
 package ee.taltech.iti0302.webproject.repository;
 
+import ee.taltech.iti0302.webproject.entities.Genre;
 import ee.taltech.iti0302.webproject.entities.Movie;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
@@ -17,4 +18,6 @@ public interface MovieRepository extends JpaRepositoryImplementation<Movie, Inte
 
     @Query(value = "SELECT * from movie where id in (SELECT movie_id FROM movie_genre where genre_id in ?1) AND date_part('year', release_date)  in ?2", nativeQuery = true)
     List<Movie> findAllByGenresInAndReleaseDateYearIn( List<Integer> genres, List<Integer> years);
+
+    List<Movie> findAllByGenresIn(List<Genre> genres);
 }

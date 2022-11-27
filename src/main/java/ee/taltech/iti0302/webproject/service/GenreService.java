@@ -10,9 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
@@ -37,14 +35,7 @@ public class GenreService {
         return new ArrayList<>();
     }
 
-    public Set<MovieDto> findMoviesByMultipleGenreIds(int[] genres) {
-        Set<MovieDto> moviesByCategory = new HashSet<>();
-        List<Genre> byIdIn = genreRepository.findByIdIn(genres);
-        for (Genre genre: byIdIn) {
-            if (genre != null) {
-                moviesByCategory.addAll(movieMapper.toDtoList(genre.getMovies()));
-            }
-        }
-        return moviesByCategory;
+    public List<Genre> findGenresByMultipleGenreIds(List<Integer> genres) {
+        return genreRepository.findByIdIn(genres);
     }
 }
