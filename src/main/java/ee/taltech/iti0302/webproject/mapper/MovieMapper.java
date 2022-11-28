@@ -34,5 +34,4 @@ public interface MovieMapper {
     }
 
     List<MovieDto> toDtoList(List<Movie> movies);
-
 }

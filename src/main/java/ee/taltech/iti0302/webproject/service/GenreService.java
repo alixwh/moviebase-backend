@@ -34,4 +34,8 @@ public class GenreService {
         }
         return new ArrayList<>();
     }
+
+    public List<Genre> findGenresByMultipleGenreIds(List<Integer> genres) {
+        return genreRepository.findByIdIn(genres);
+    }
 }

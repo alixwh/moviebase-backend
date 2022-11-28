@@ -1,7 +1,6 @@
 package ee.taltech.iti0302.webproject.service;
 
 import ee.taltech.iti0302.webproject.dto.ActorDto;
-import ee.taltech.iti0302.webproject.dto.GenreDto;
 import ee.taltech.iti0302.webproject.dto.MovieDto;
 import ee.taltech.iti0302.webproject.entities.Actor;
 import ee.taltech.iti0302.webproject.mapper.ActorMapper;

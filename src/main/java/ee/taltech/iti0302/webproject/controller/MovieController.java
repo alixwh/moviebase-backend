@@ -28,23 +28,28 @@ public class MovieController {
         return movieService.findAll();
     }
 
-    @GetMapping("movies/year/{releaseYear}")
-    public List<MovieDto> getMoviesByReleaseYear(@PathVariable("releaseYear") int year) {
-        return movieService.findByYear(year);
-    }
-
     @GetMapping("movies/actor/{id}")
     public List<MovieDto> getMoviesByActor(@PathVariable("id") int actorId) {
         return actorService.findMoviesByActorId(actorId);
     }
 
     @GetMapping("movies/genre/{id}")
-    public List<MovieDto> getMoviesByCategory(@PathVariable("id") int genreId) {
+    public List<MovieDto> getMoviesByGenreId(@PathVariable("id") int genreId) {
         return genreService.findMoviesByGenreId(genreId);
+    }
+
+    @GetMapping("movies/year/{releaseYear}")
+    public List<MovieDto> getMoviesByReleaseYear(@PathVariable("releaseYear") int year) {
+        return movieService.findByYear(year);
     }
 
     @GetMapping("search")
     public List<MovieDto> getMoviesByName(@RequestParam("query") String movieName) {
         return movieService.findByName(movieName);
+    }
+
+    @GetMapping("filter")
+    public List<MovieDto> getMoviesByYearsAndGenres(@RequestParam(required=false) List<Integer> genre, @RequestParam(required = false) List<Integer> year) {
+        return movieService.findByMultipleYearsAndGenres(year, genre);
     }
 }
