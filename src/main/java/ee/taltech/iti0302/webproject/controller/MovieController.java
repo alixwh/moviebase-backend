@@ -33,7 +33,7 @@ public class MovieController {
         return actorService.findMoviesByActorId(actorId);
     }
 
-    @GetMapping("movies/{id}")
+    @GetMapping("movies/genre/{id}")
     public List<MovieDto> getMoviesByGenreId(@PathVariable("id") int genreId) {
         return genreService.findMoviesByGenreId(genreId);
     }
