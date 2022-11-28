@@ -33,12 +33,12 @@ public class MovieController {
         return actorService.findMoviesByActorId(actorId);
     }
 
-    @GetMapping("genre/{id}")
+    @GetMapping("movies/{id}")
     public List<MovieDto> getMoviesByGenreId(@PathVariable("id") int genreId) {
         return genreService.findMoviesByGenreId(genreId);
     }
 
-    @GetMapping("year/{releaseYear}")
+    @GetMapping("movies/year/{releaseYear}")
     public List<MovieDto> getMoviesByReleaseYear(@PathVariable("releaseYear") int year) {
         return movieService.findByYear(year);
     }
