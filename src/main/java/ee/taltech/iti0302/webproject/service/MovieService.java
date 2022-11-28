@@ -53,8 +53,9 @@ public class MovieService {
         if (years == null || genres == null) {
             return new ArrayList<>();
         } else {
-            if (!years.isEmpty() && !genres.isEmpty())
+            if (!years.isEmpty() && !genres.isEmpty()) {
                 return movieMapper.toDtoList(movieRepository.findAllByGenresInAndReleaseDateYearIn(genres, years));
+            }
             return !years.isEmpty() ? findByMultipleYears(years) : findByMultipleGenres(genreRepository.findAllById(genres));
         }
     }

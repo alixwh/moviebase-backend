@@ -17,7 +17,7 @@ public interface MovieRepository extends JpaRepositoryImplementation<Movie, Inte
     List<Movie> findByTitleContainingIgnoreCase(String movieName);
 
     @Query(value = "SELECT * from movie where id in (SELECT movie_id FROM movie_genre where genre_id in ?1) AND date_part('year', release_date)  in ?2", nativeQuery = true)
-    List<Movie> findAllByGenresInAndReleaseDateYearIn( List<Integer> genres, List<Integer> years);
+    List<Movie> findAllByGenresInAndReleaseDateYearIn(List<Integer> genres, List<Integer> years);
 
     List<Movie> findAllByGenresIn(List<Genre> genres);
 }
