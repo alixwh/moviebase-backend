@@ -25,8 +25,10 @@ public class MovieController {
     }
 
     @GetMapping("movies")
-    public List<MovieDto> getMovies() {
-        return movieService.findAll();
+    public Page<MovieDto> getMovies(@RequestParam(defaultValue = "0") int page,
+                                    @RequestParam(defaultValue = "vote_average") String orderBy,
+                                    @RequestParam(defaultValue = "false") boolean ascending) {
+        return movieService.findAll(page, orderBy, ascending);
     }
 
     @GetMapping("movies/actor/{id}")

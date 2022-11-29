@@ -19,9 +19,10 @@ public class MovieService {
     private final MovieMapper movieMapper;
     private static final int PAGE_SIZE = 20;
 
-
-    public List<MovieDto> findAll() {
-        return movieMapper.toDtoList(movieRepository.findAll());
+    public Page<MovieDto> findAll(int page, String orderBy, boolean ascending) {
+        Pageable pageable = getPageable(page, orderBy, ascending);
+        Page<Movie> allMovies = movieRepository.findAll(pageable);
+        return new PageImpl<>(movieMapper.toDtoList(allMovies.getContent()), pageable, allMovies.getTotalElements());
     }
 
     private Page<MovieDto> getMovieDtoPage(Pageable pageable, Page<Movie> movieList) {
@@ -69,9 +70,7 @@ public class MovieService {
 
     public Page<MovieDto> findByMultipleYearsAndGenres(List<Integer> genres, List<Integer> years, int page, String orderBy, boolean ascending ) {
         if (genres == null && years == null) {
-            Pageable pageable = getPageable(page, orderBy, ascending);
-            Page<Movie> all = movieRepository.findAll(pageable);
-            return getMovieDtoPage(pageable, all);
+            return findAll(page, orderBy, ascending);
         } else if (genres == null) {
             return findByMultipleYears(years, page, orderBy, ascending);
         } else if (years == null) {

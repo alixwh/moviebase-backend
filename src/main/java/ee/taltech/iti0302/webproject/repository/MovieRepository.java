@@ -24,4 +24,8 @@ public interface MovieRepository extends JpaRepositoryImplementation<Movie, Inte
 
     @Query(value = "SELECT * from movie where id in (SELECT movie_id FROM movie_genre where genre_id in ?1)", nativeQuery = true)
     Page<Movie> findAllByGenresIn(List<Integer> genres, Pageable pageable);
+
+    @Override
+    @Query(value = "SELECT * from movie", nativeQuery = true)
+    Page<Movie> findAll(Pageable pageable);
 }
