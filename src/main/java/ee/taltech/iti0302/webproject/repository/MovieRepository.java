@@ -9,18 +9,18 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryImplementati
 import java.util.List;
 
 public interface MovieRepository extends JpaRepositoryImplementation<Movie, Integer> {
-    @Query(value="SELECT * FROM movie where date_part('year', release_date) = ?1", nativeQuery = true)
-    List<Movie> findAllByReleaseDateYear(int year);
+    @Query(value="SELECT * FROM movie where date_part('year', release_date) = :year", nativeQuery = true)
+    List<Movie> findAllByReleaseDate(int year);
 
-    @Query(value="SELECT * FROM movie where date_part('year', release_date) in ?1", nativeQuery = true)
-    Page<Movie> findAllByReleaseDateYearIn(List<Integer> years, Pageable pageable);
+    @Query(value="SELECT * FROM movie where date_part('year', release_date) in :years", nativeQuery = true)
+    Page<Movie> findAllByReleaseDateIn(List<Integer> years, Pageable pageable);
 
     List<Movie> findByTitleContainingIgnoreCase(String movieName);
 
-    @Query(value = "SELECT * from movie where id in (SELECT movie_id FROM movie_genre where genre_id in ?1) AND date_part('year', release_date) in ?2 ORDER BY vote_average",
+    @Query(value = "SELECT * from movie where id in (SELECT movie_id FROM movie_genre where genre_id in :genres) AND date_part('year', release_date) in :years",
             countQuery = "SELECT count(*) FROM movie",
             nativeQuery = true)
-    Page<Movie> findAllByGenresInAndReleaseDateYearIn(List<Integer> genres, List<Integer> years, Pageable pageable);
+    Page<Movie> findAllByGenresInAndReleaseDateIn(List<Integer> genres, List<Integer> years, Pageable pageable);
 
     @Query(value = "SELECT * from movie where id in (SELECT movie_id FROM movie_genre where genre_id in ?1)", nativeQuery = true)
     Page<Movie> findAllByGenresIn(List<Integer> genres, Pageable pageable);
