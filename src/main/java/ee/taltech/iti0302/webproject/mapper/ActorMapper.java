@@ -17,8 +17,8 @@ public interface ActorMapper {
 
     ActorDto toDto(Actor actor);
 
-    default String mapToMovieTitle(Movie movie) {
-        return movie.getTitle();
+    default Integer mapToMovieId(Movie movie) {
+        return movie.getId();
     }
 
     List<ActorDto> toDtoList(List<Actor> actors);

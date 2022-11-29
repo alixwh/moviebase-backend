@@ -7,6 +7,6 @@ import java.util.Set;
 public class ActorDto {
     private int id;
     private String name;
-    private Set<String> actorMovies;
+    private Set<Integer> actorMovies;
     private String profilePath;
 }
