@@ -25,10 +25,8 @@ public class MovieController {
     }
 
     @GetMapping("movies")
-    public Page<MovieDto> getMovies(@RequestParam(required = false, defaultValue = "0") int page,
-                                    @RequestParam(defaultValue = "vote_average") String orderBy,
-                                    @RequestParam(defaultValue = "true") boolean ascending) {
-        return movieService.findAll(page, orderBy, ascending);
+    public List<MovieDto> getMovies() {
+        return movieService.findAll();
     }
 
     @GetMapping("movies/actor/{id}")
@@ -56,7 +54,7 @@ public class MovieController {
                                                     @RequestParam(required = false) List<Integer> year,
                                                     @RequestParam(defaultValue = "0") int page,
                                                     @RequestParam(defaultValue = "vote_average") String orderBy,
-                                                    @RequestParam(defaultValue = "true") boolean ascending) {
+                                                    @RequestParam(defaultValue = "false") boolean ascending) {
         return movieService.findByMultipleYearsAndGenres(genre, year, page, orderBy, ascending);
     }
 }

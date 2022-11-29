@@ -69,7 +69,9 @@ public class MovieService {
 
     public Page<MovieDto> findByMultipleYearsAndGenres(List<Integer> genres, List<Integer> years, int page, String orderBy, boolean ascending ) {
         if (genres == null && years == null) {
-            return null;
+            Pageable pageable = getPageable(page, orderBy, ascending);
+            Page<Movie> all = movieRepository.findAll(pageable);
+            return getMovieDtoPage(pageable, all);
         } else if (genres == null) {
             return findByMultipleYears(years, page, orderBy, ascending);
         } else if (years == null) {
