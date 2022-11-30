@@ -2,15 +2,13 @@ package ee.taltech.iti0302.webproject.service;
 
 import ee.taltech.iti0302.webproject.api.service.MovieExternalService;
 import ee.taltech.iti0302.webproject.dto.MovieDto;
-import ee.taltech.iti0302.webproject.entities.Genre;
 import ee.taltech.iti0302.webproject.entities.Movie;
 import ee.taltech.iti0302.webproject.mapper.MovieMapper;
-import ee.taltech.iti0302.webproject.repository.GenreRepository;
 import ee.taltech.iti0302.webproject.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -18,11 +16,28 @@ import java.util.List;
 public class MovieService {
     private final MovieExternalService movieExternalService;
     private final MovieRepository movieRepository;
-    private final GenreRepository genreRepository;
     private final MovieMapper movieMapper;
+    private static final int PAGE_SIZE = 20;
 
-    public List<MovieDto> findAll() {
-        return movieMapper.toDtoList(movieRepository.findAll());
+    public Page<MovieDto> findAll(int page, String orderBy, boolean ascending) {
+        Pageable pageable = getPageable(page, orderBy, ascending);
+        Page<Movie> allMovies = movieRepository.findAll(pageable);
+        return new PageImpl<>(movieMapper.toDtoList(allMovies.getContent()), pageable, allMovies.getTotalElements());
+    }
+
+    private Page<MovieDto> getMovieDtoPage(Pageable pageable, Page<Movie> movieList) {
+        List<MovieDto> movieDtos = movieMapper.toDtoList(movieList.getContent());
+        return new PageImpl<>(movieDtos, pageable, movieList.getTotalElements());
+    }
+
+    private Pageable getPageable(int page, String orderBy, boolean ascending) {
+        Sort sort;
+        if (ascending) {
+            sort = Sort.by(orderBy).ascending();
+        } else {
+            sort = Sort.by(orderBy).descending();
+        }
+        return PageRequest.of(page, PAGE_SIZE, sort);
     }
 
     public MovieDto findById(int id) {
@@ -38,25 +53,33 @@ public class MovieService {
     }
 
     public List<MovieDto> findByYear(int year) {
-        return movieMapper.toDtoList(movieRepository.findAllByReleaseDateYear(year));
+        return movieMapper.toDtoList(movieRepository.findAllByReleaseDate(year));
     }
 
-    public List<MovieDto> findByMultipleYears(List<Integer> years) {
-        return movieMapper.toDtoList(movieRepository.findAllByReleaseDateYearIn(years));
+    public Page<MovieDto> findByMultipleYears(List<Integer> years,  int page, String orderBy, boolean ascending) {
+        Pageable pageable = getPageable(page, orderBy, ascending);
+        Page<Movie> movieList = movieRepository.findAllByReleaseDateIn(years, pageable);
+        return getMovieDtoPage(pageable, movieList);
     }
 
-    public List<MovieDto> findByMultipleGenres(List<Genre> genres) {
-        return movieMapper.toDtoList(movieRepository.findAllByGenresIn(genres));
+    public Page<MovieDto> findByMultipleGenres(List<Integer> genres, int page, String orderBy, boolean ascending) {
+        Pageable pageable = getPageable(page, orderBy, ascending);
+        Page<Movie> movieList = movieRepository.findAllByGenresIn(genres, pageable);
+        return getMovieDtoPage(pageable, movieList);
     }
 
-    public List<MovieDto> findByMultipleYearsAndGenres(List<Integer> years, List<Integer> genres) {
-        if (years == null || genres == null) {
-            return new ArrayList<>();
+    public Page<MovieDto> findByMultipleYearsAndGenres(List<Integer> genres, List<Integer> years, int page, String orderBy, boolean ascending ) {
+        if (genres == null && years == null) {
+            return findAll(page, orderBy, ascending);
+        } else if (genres == null) {
+            return findByMultipleYears(years, page, orderBy, ascending);
+        } else if (years == null) {
+            return findByMultipleGenres(genres, page, orderBy, ascending);
         } else {
-            if (!years.isEmpty() && !genres.isEmpty()) {
-                return movieMapper.toDtoList(movieRepository.findAllByGenresInAndReleaseDateYearIn(genres, years));
-            }
-            return !years.isEmpty() ? findByMultipleYears(years) : findByMultipleGenres(genreRepository.findAllById(genres));
+
+            Pageable pageable = getPageable(page, orderBy, ascending);
+            Page<Movie> movieList = movieRepository.findAllByGenresInAndReleaseDateIn(genres, years, pageable);
+            return getMovieDtoPage(pageable, movieList);
         }
     }
 }

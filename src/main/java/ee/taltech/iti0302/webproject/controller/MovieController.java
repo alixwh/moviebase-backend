@@ -5,6 +5,7 @@ import ee.taltech.iti0302.webproject.service.ActorService;
 import ee.taltech.iti0302.webproject.service.GenreService;
 import ee.taltech.iti0302.webproject.service.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +25,10 @@ public class MovieController {
     }
 
     @GetMapping("movies")
-    public List<MovieDto> getMovies() {
-        return movieService.findAll();
+    public Page<MovieDto> getMovies(@RequestParam(defaultValue = "0") int page,
+                                    @RequestParam(defaultValue = "vote_average") String orderBy,
+                                    @RequestParam(defaultValue = "false") boolean ascending) {
+        return movieService.findAll(page, orderBy, ascending);
     }
 
     @GetMapping("movies/actor/{id}")
@@ -49,7 +52,11 @@ public class MovieController {
     }
 
     @GetMapping("filter")
-    public List<MovieDto> getMoviesByYearsAndGenres(@RequestParam(required=false) List<Integer> genre, @RequestParam(required = false) List<Integer> year) {
-        return movieService.findByMultipleYearsAndGenres(year, genre);
+    public Page<MovieDto> getMoviesByYearsAndGenres(@RequestParam(required = false) List<Integer> genre,
+                                                    @RequestParam(required = false) List<Integer> year,
+                                                    @RequestParam(defaultValue = "0") int page,
+                                                    @RequestParam(defaultValue = "vote_average") String orderBy,
+                                                    @RequestParam(defaultValue = "false") boolean ascending) {
+        return movieService.findByMultipleYearsAndGenres(genre, year, page, orderBy, ascending);
     }
 }
