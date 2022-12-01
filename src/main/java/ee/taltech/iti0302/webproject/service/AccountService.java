@@ -47,8 +47,6 @@ public class AccountService {
         account.setPassword(passwordEncoder.encode(createAccountRequest.getPassword()));
         account.setAccountRole(AccountRole.ROLE_USER);
 
-        // TODO throw exception if name exist already
-
         accountRepository.save(account);
         // temporary !!!
         return new RegisterResponse("register successful");
@@ -94,12 +92,24 @@ public class AccountService {
     }
 
     public List<MovieDto> findWatchlist(Integer id, String state) {
-        Account byId = accountRepository.getReferenceById(id);
-        Map<Movie, String> movieMap = byId.getMovieMap();
-        List<Movie> movies = movieMap.keySet()
-                .stream()
-                .filter(movie -> movieMap.get(movie).equals(state))
-                .toList();
-        return movieMapper.toDtoList(movies);
+        Account byId = accountRepository.findById(id).orElse(null);
+        if (byId != null) {
+            Map<Movie, String> movieMap = byId.getMovieMap();
+            List<Movie> movies = movieMap.keySet()
+                    .stream()
+                    .filter(movie -> movieMap.get(movie).equals(state))
+                    .toList();
+            return movieMapper.toDtoList(movies);
+        }
+        return new ArrayList<>();
+    }
+
+    public void deleteMovieFromList(Integer movieId, String name) {
+        Account account = accountRepository.findByUsername(name).orElse(null);
+        Movie movie = movieRepository.findById(movieId).orElse(null);
+        if (account != null) {
+            account.getMovieMap().remove(movie);
+            accountRepository.save(account);
+        }
     }
 }

@@ -46,7 +46,7 @@ public class AccountController {
         return accountService.login(loginRequest.getUsername(), loginRequest.getPassword());
     }
 
-    @DeleteMapping("/delete/{id}") // account vahele siia
+    @DeleteMapping("account/delete/{id}")
     public void delete(@PathVariable Integer id) {
         accountService.delete(id);
     }
@@ -64,4 +64,10 @@ public class AccountController {
     public List<MovieDto> getMovieMap(@PathVariable Integer id, @PathVariable String state) {
         return accountService.findWatchlist(id, state);
     }
+
+    @DeleteMapping("account/movie/delete/{movieId}")
+    public void deleteMovieFromList(@PathVariable Integer movieId, Principal principal) {
+        accountService.deleteMovieFromList(movieId, principal.getName());
+    }
+
 }

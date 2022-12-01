@@ -33,7 +33,7 @@ public class Account implements UserDetails {
     @CollectionTable(name = "account_movie", joinColumns = {@JoinColumn(name = "account_id", referencedColumnName = "id")})
     @MapKeyJoinColumn(name = "movie_id")
     @Column(name = "state")
-    transient Map<Movie, String> movieMap;
+    private Map<Movie, String> movieMap;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
