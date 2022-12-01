@@ -189,4 +189,7 @@
             <column name="profile_path"  type="text" />
         </addColumn>
     </changeSet>
+    <changeSet  id="20221201-1"  author="brkerg">
+        <modifyDataType tableName="account_movie" columnName="state" newDataType="text"/>
+    </changeSet>
 </databaseChangeLog>
