@@ -30,9 +30,6 @@ public class SecurityConfiguration {
                                 "/v3/api-docs/**",
                                 "/webjars/**").permitAll()
                         .anyRequest().authenticated())
-//                .mvcMatchers("/api/registration/**").permitAll()
-//                .mvcMatchers("/api/**").hasRole("ADMIN")
-//                .anyRequest().authenticated());
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }

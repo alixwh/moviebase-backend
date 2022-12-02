@@ -21,7 +21,7 @@ public class JwtTokenProvider {
         claims.put("id", id);
         claims.put("accountRole", role);
         long currentTimeMillis = System.currentTimeMillis();
-        long tokenDuration = 600000;
+        long tokenDuration = 60000000;
         return Jwts.builder()
                 .setSubject("subject")
                 .addClaims(claims)

@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
 
 @Getter @Setter
@@ -28,9 +29,11 @@ public class Account implements UserDetails {
     @JoinTable(name = "account_account_friendlist", joinColumns = @JoinColumn(name = "account1_id"), inverseJoinColumns = @JoinColumn(name = "account2_id"))
     private Set<Account> friends;
 
-    @ManyToMany
-    @JoinTable(name = "account_movie", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
-    transient Set<Movie> movies;
+    @ElementCollection
+    @CollectionTable(name = "account_movie", joinColumns = {@JoinColumn(name = "account_id", referencedColumnName = "id")})
+    @MapKeyJoinColumn(name = "movie_id")
+    @Column(name = "state")
+    private Map<Movie, String> movieMap;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -38,6 +41,9 @@ public class Account implements UserDetails {
         return Collections.singletonList(authority);
     }
 
+    public void addMovie(Movie movie, String state) {
+        movieMap.put(movie, state);
+    }
     @Override
     public String getPassword() {
         return password;
