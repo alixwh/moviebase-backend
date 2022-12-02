@@ -1,5 +1,6 @@
 package ee.taltech.iti0302.webproject.entities;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.util.Set;
 
 @Getter @Setter
 @Entity
+@Builder
 public class Movie {
     @Id
     private int id;
