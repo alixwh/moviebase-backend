@@ -1,17 +1,17 @@
 package ee.taltech.iti0302.webproject.entities;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
-@Getter @Setter
+@Getter @Setter(value = AccessLevel.PACKAGE)
 @Entity
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Movie {
     @Id
     private int id;
