@@ -1,6 +1,7 @@
 package ee.taltech.iti0302.webproject.dto;
 
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Data
+@Builder
 public class MovieDto {
     private int id;
     private String title;
