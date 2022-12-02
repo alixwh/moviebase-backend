@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
-@Getter @Setter(value = AccessLevel.PACKAGE)
+@Getter @Setter
 @Entity
 @Builder
 @AllArgsConstructor
