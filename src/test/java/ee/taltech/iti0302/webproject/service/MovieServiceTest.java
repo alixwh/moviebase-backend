@@ -48,7 +48,7 @@ class MovieServiceTest {
 
         var result= movieService.findAll(1, "voteAverage", false);
 
-        then(movieMapper).should().toDto(movie);
+        then(movieMapper).should().toDtoList(List.of(movie));
         then(movieRepository).should().findAll(PageRequest.of(1, 20, sort));
         assertEquals(new PageImpl<>(List.of(movieDto),PageRequest.of(1, 20, sort), 1), result);
     }
@@ -74,7 +74,7 @@ class MovieServiceTest {
 
         var result= movieService.findByYear(LocalDate.now().getYear());
 
-        then(movieMapper).should().toDto(movie);
+        then(movieMapper).should().toDtoList(List.of(movie));
         then(movieRepository).should().findAllByReleaseDate(LocalDate.now().getYear());
         assertEquals(List.of(movieDto), result);
     }
