@@ -37,8 +37,9 @@ class MovieServiceTest {
     public static final Movie movie = Movie.builder().id(1).title("Wakanda")
             .overview("As the Wakandans strive to embrace their next chapter...")
             .releaseDate(LocalDate.now()).voteAverage(8.1).posterPath("/ps2oKfhY6DL3alynlSqY97gHSsg.jpg").build();
-    public static final MovieDto movieDto = MovieDto.builder().id(1).title("Wakanda").overview("As the Wakandans strive to embrace their next chapter...")
-                .releaseDate(LocalDate.now()).voteAverage(8.1).posterPath("/ps2oKfhY6DL3alynlSqY97gHSsg.jpg").build();
+    public static final MovieDto movieDto = MovieDto.builder().id(1).title("Wakanda")
+            .overview("As the Wakandans strive to embrace their next chapter...")
+            .releaseDate(LocalDate.now()).voteAverage(8.1).posterPath("/ps2oKfhY6DL3alynlSqY97gHSsg.jpg").build();
 
     @Test
     void findAll_ShouldReturnPageOfMovies() {
