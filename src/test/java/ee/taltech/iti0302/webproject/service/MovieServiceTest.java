@@ -37,8 +37,9 @@ class MovieServiceTest {
     public static final Movie movie = Movie.builder().id(1).title("Wakanda")
             .overview("As the Wakandans strive to embrace their next chapter...")
             .releaseDate(LocalDate.now()).voteAverage(8.1).posterPath("/ps2oKfhY6DL3alynlSqY97gHSsg.jpg").build();
-    public static final MovieDto movieDto = MovieDto.builder().id(1).title("Wakanda").overview("As the Wakandans strive to embrace their next chapter...")
-                .releaseDate(LocalDate.now()).voteAverage(8.1).posterPath("/ps2oKfhY6DL3alynlSqY97gHSsg.jpg").build();
+    public static final MovieDto movieDto = MovieDto.builder().id(1).title("Wakanda")
+            .overview("As the Wakandans strive to embrace their next chapter...")
+            .releaseDate(LocalDate.now()).voteAverage(8.1).posterPath("/ps2oKfhY6DL3alynlSqY97gHSsg.jpg").build();
 
     @Test
     void findAll_ShouldReturnPageOfMovies() {
@@ -47,7 +48,7 @@ class MovieServiceTest {
 
         var result= movieService.findAll(1, "voteAverage", false);
 
-        then(movieMapper).should().toDto(movie);
+        then(movieMapper).should().toDtoList(List.of(movie));
         then(movieRepository).should().findAll(PageRequest.of(1, 20, sort));
         assertEquals(new PageImpl<>(List.of(movieDto),PageRequest.of(1, 20, sort), 1), result);
     }
@@ -73,7 +74,7 @@ class MovieServiceTest {
 
         var result= movieService.findByYear(LocalDate.now().getYear());
 
-        then(movieMapper).should().toDto(movie);
+        then(movieMapper).should().toDtoList(List.of(movie));
         then(movieRepository).should().findAllByReleaseDate(LocalDate.now().getYear());
         assertEquals(List.of(movieDto), result);
     }
