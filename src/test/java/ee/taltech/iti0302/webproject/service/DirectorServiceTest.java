@@ -1,10 +1,8 @@
 package ee.taltech.iti0302.webproject.service;
 
 import ee.taltech.iti0302.webproject.dto.DirectorDto;
-import ee.taltech.iti0302.webproject.dto.GenreDto;
 import ee.taltech.iti0302.webproject.dto.MovieDto;
 import ee.taltech.iti0302.webproject.entities.Director;
-import ee.taltech.iti0302.webproject.entities.Genre;
 import ee.taltech.iti0302.webproject.entities.Movie;
 import ee.taltech.iti0302.webproject.mapper.DirectorMapper;
 import ee.taltech.iti0302.webproject.mapper.DirectorMapperImpl;

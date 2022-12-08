@@ -27,10 +27,6 @@ public class ActorService {
         return actorMapper.toDtoList(actorRepository.findAll());
     }
 
-    public void save(Actor actor) {
-        actorRepository.save(actor);
-    }
-
     public List<MovieDto> findMoviesByActorId(int id) {
         Actor actor = actorRepository.findById(id).orElse(null);
         if (actor != null) {
