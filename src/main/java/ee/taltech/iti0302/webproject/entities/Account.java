@@ -1,8 +1,7 @@
 package ee.taltech.iti0302.webproject.entities;
 
 import ee.taltech.iti0302.webproject.account.AccountRole;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +14,9 @@ import java.util.Set;
 
 @Getter @Setter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Account implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +25,7 @@ public class Account implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private AccountRole accountRole;
+    @Builder.Default
     private Boolean locked = false;
 
     @ManyToMany
