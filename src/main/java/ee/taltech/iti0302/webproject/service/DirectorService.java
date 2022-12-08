@@ -14,10 +14,8 @@ import java.util.List;
 public class DirectorService {
     private final DirectorRepository directorRepository;
     private final DirectorMapper directorMapper;
+
     public List<DirectorDto> findAll() {
         return directorMapper.toDtoList(directorRepository.findAll());
-    }
-    public void save(Director director) {
-        directorRepository.save(director);
     }
 }
