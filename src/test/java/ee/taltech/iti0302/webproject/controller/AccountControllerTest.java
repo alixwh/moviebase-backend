@@ -24,19 +24,6 @@ class AccountControllerTest extends AbstractIntegrationTest {
     private MockMvc mvc;
 
     @Test
-    void getAccountById() {
-//        mvc.perform(get("/api/public/accounts"))
-    }
-
-    @Test
-    void getAccounts() {
-    }
-
-    @Test
-    void getAccount() {
-    }
-
-    @Test
     void createAccount() throws Exception {
         mvc.perform(post("/api/public/register")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -46,26 +33,12 @@ class AccountControllerTest extends AbstractIntegrationTest {
                 .andExpect(jsonPath("$.reason").value("register successful"));
     }
     @Test
-    void login() {
-    }
+    void loginFailed() throws Exception {
+        mvc.perform(post("/api/public/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"username\":\"user\",\"password\":\"test\"}"))
+                .andDo(print()).andExpect(status().is(400))
+                .andExpect(content().contentType("application/json"));
 
-    @Test
-    void delete() {
-    }
-
-    @Test
-    void addMovie() {
-    }
-
-    @Test
-    void changeMovieState() {
-    }
-
-    @Test
-    void getMovieMap() {
-    }
-
-    @Test
-    void deleteMovieFromList() {
     }
 }
