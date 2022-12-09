@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+        http://www.liquibase.org/xml/ns/pro
+        http://www.liquibase.org/xml/ns/pro/changelog-pro-4.1.xsd">
+
+    <include file="db/changelog/changelog-master.xml"/>
+
+    <changeSet id="20221208" author="hahinn">
+        <insert tableName="genre">
+            <column name="id" value="1"/>
+            <column name="name" value="action"/>
+        </insert>
+        <insert tableName="genre">
+            <column name="id" value="2"/>
+            <column name="name" value="thriller"/>
+        </insert>
+        <insert tableName="actor">
+            <column name="id" value="2"/>
+            <column name="name" value="Letitia Wright"/>
+            <column name="profile_path" value="/kfA5KhyU6OSy4NrMzHCxYU7A0DW.jpg"/>
+        </insert>
+        <insert tableName="director">
+            <column name="id" value="1"/>
+            <column name="name" value="Ryan Coogler"/>
+        </insert>
+        <insert tableName="movie">
+            <column name="id" value="1"/>
+            <column name="title" value="Black Panther: Wakanda Forever"/>
+            <column name="overview" value="Queen Ramonda, Shuri, M’Baku, Okoye and the Dora Milaje fight to protect their nation from intervening world powers in the wake of King T’Challa’s death."/>
+            <column name="release_date" value="2022-11-09"/>
+            <column name="vote_average" value="7.5"/>
+            <column name="poster_path" value="/sv1xJUazXeYqALzczSZ3O6nkH75.jpg"/>
+        </insert>
+        <insert tableName="actor">
+            <column name="id" value="3"/>
+            <column name="name" value="Virginia Gardner"/>
+            <column name="profile_path" value="/1DnNysK267b0te48KCkUlTKoTzj.jpg"/>
+        </insert>
+        <insert tableName="director">
+            <column name="id" value="2"/>
+            <column name="name" value="Scott Mann"/>
+        </insert>
+        <insert tableName="movie">
+            <column name="id" value="2"/>
+            <column name="title" value="Fall"/>
+            <column name="overview" value="For best friends Becky and Hunter, life is all about conquering fears and pushing limits."/>
+            <column name="release_date" value="2022-08-11"/>
+            <column name="vote_average" value="7.3"/>
+            <column name="poster_path" value="/spCAxD99U1A6jsiePFoqdEcY0dG"/>
+        </insert>
+        <insert tableName="movie_actor">
+            <column name="movie_id" value="2"/>
+            <column name="actor_id" value="3"/>
+        </insert>
+        <insert tableName="movie_actor">
+            <column name="movie_id" value="1"/>
+            <column name="actor_id" value="2"/>
+        </insert>
+        <insert tableName="movie_genre">
+            <column name="movie_id" value="1"/>
+            <column name="genre_id" value="1"/>
+        </insert>
+        <insert tableName="movie_genre">
+            <column name="movie_id" value="2"/>
+            <column name="genre_id" value="2"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
