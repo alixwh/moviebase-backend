@@ -29,7 +29,7 @@ class MovieControllerTest extends AbstractIntegrationTest {
     void getMovies() throws Exception {
         mvc.perform(get("/api/public/movies"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content[0].title").value("Black Panther: Wakanda Forever"));
+                .andExpect(jsonPath("$.content[0].id").value("1"));
     }
 
     @Test
