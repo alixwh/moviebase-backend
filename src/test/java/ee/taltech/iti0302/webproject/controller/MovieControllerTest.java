@@ -7,7 +7,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -21,7 +20,7 @@ class MovieControllerTest extends AbstractIntegrationTest {
 
     @Test
     void getMovieById() throws Exception {
-        mvc.perform(get("/api/public/movies/1").with(user("user")))
+        mvc.perform(get("/api/public/movies/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Black Panther: Wakanda Forever"));
     }
