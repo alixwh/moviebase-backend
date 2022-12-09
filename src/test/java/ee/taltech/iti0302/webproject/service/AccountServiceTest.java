@@ -1,7 +1,5 @@
 package ee.taltech.iti0302.webproject.service;
 
-import ee.taltech.iti0302.webproject.account.AccountRole;
-import ee.taltech.iti0302.webproject.account.login.LoginResponse;
 import ee.taltech.iti0302.webproject.account.register.RegisterResponse;
 import ee.taltech.iti0302.webproject.dto.AccountDto;
 import ee.taltech.iti0302.webproject.dto.MovieDto;
@@ -9,11 +7,7 @@ import ee.taltech.iti0302.webproject.entities.Account;
 import ee.taltech.iti0302.webproject.entities.Movie;
 import ee.taltech.iti0302.webproject.mapper.AccountMapper;
 import ee.taltech.iti0302.webproject.mapper.AccountMapperImpl;
-import ee.taltech.iti0302.webproject.mapper.MovieMapper;
-import ee.taltech.iti0302.webproject.mapper.MovieMapperImpl;
 import ee.taltech.iti0302.webproject.repository.AccountRepository;
-import ee.taltech.iti0302.webproject.repository.MovieRepository;
-import ee.taltech.iti0302.webproject.security.JwtTokenProvider;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,11 +22,9 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -40,13 +32,7 @@ class AccountServiceTest {
     @Mock
     private AccountRepository accountRepository;
     @Spy
-    private MovieRepository movieRepository;
-    @Spy
     private AccountMapper accountMapper = new AccountMapperImpl();
-    @Spy
-    private JwtTokenProvider tokenProvider;
-    @Spy
-    private MovieMapper movieMapper = new MovieMapperImpl();
     @Spy
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @InjectMocks
