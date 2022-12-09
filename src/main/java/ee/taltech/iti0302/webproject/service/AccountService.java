@@ -13,6 +13,7 @@ import ee.taltech.iti0302.webproject.repository.AccountRepository;
 import ee.taltech.iti0302.webproject.repository.MovieRepository;
 import ee.taltech.iti0302.webproject.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.util.*;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class AccountService {
     private final AccountRepository accountRepository;
     private final MovieRepository movieRepository;
@@ -48,6 +50,7 @@ public class AccountService {
         optionalAccount.ifPresent(error -> {throw new ApplicationException("Username taken");});
         Account account = Account.builder().username(username).password(passwordEncoder.encode(password)).build();
         accountRepository.save(account);
+        log.info("Account created");
         return new RegisterResponse("register successful");
     }
 
@@ -58,6 +61,7 @@ public class AccountService {
             String token = tokenProvider.generateToken(username, account.getId(), account.getAccountRole());
             return new LoginResponse(token);
         } else {
+            log.warn("Wrong password");
             throw new ApplicationException("Wrong password");
         }
     }
@@ -67,6 +71,7 @@ public class AccountService {
             accountRepository.deleteById(id);
             return true;
         }
+        log.warn("Delete failed");
         return false;
     }
 
@@ -85,6 +90,7 @@ public class AccountService {
         Account account = optionalAccount.orElseThrow(() -> new ApplicationException(NO_ACCOUNT_FOUND));
         account.addMovie(movie, state);
         accountRepository.save(account);
+        log.info("Changed movie state");
     }
 
     public List<MovieDto> findWatchlist(Integer accountId, String state) {
@@ -105,5 +111,6 @@ public class AccountService {
         Movie movie = optionalMovie.orElseThrow(() -> new ApplicationException("No movie found"));
         account.getMovieMap().remove(movie);
         accountRepository.save(account);
+        log.info("Removed movie " + movieId + " from " + name);
     }
 }
