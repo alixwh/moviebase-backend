@@ -14,8 +14,12 @@
             <column name="id" value="1"/>
             <column name="name" value="action"/>
         </insert>
+        <insert tableName="genre">
+            <column name="id" value="2"/>
+            <column name="name" value="thriller"/>
+        </insert>
         <insert tableName="actor">
-            <column name="id" value="1"/>
+            <column name="id" value="2"/>
             <column name="name" value="Letitia Wright"/>
             <column name="profile_path" value="/kfA5KhyU6OSy4NrMzHCxYU7A0DW.jpg"/>
         </insert>
@@ -30,6 +34,39 @@
             <column name="release_date" value="2022-11-09"/>
             <column name="vote_average" value="7.5"/>
             <column name="poster_path" value="/sv1xJUazXeYqALzczSZ3O6nkH75.jpg"/>
+        </insert>
+        <insert tableName="actor">
+            <column name="id" value="3"/>
+            <column name="name" value="Virginia Gardner"/>
+            <column name="profile_path" value="/1DnNysK267b0te48KCkUlTKoTzj.jpg"/>
+        </insert>
+        <insert tableName="director">
+            <column name="id" value="2"/>
+            <column name="name" value="Scott Mann"/>
+        </insert>
+        <insert tableName="movie">
+            <column name="id" value="2"/>
+            <column name="title" value="Fall"/>
+            <column name="overview" value="For best friends Becky and Hunter, life is all about conquering fears and pushing limits."/>
+            <column name="release_date" value="2022-08-11"/>
+            <column name="vote_average" value="7.3"/>
+            <column name="poster_path" value="/spCAxD99U1A6jsiePFoqdEcY0dG"/>
+        </insert>
+        <insert tableName="movie_actor">
+            <column name="movie_id" value="2"/>
+            <column name="actor_id" value="3"/>
+        </insert>
+        <insert tableName="movie_actor">
+            <column name="movie_id" value="1"/>
+            <column name="actor_id" value="2"/>
+        </insert>
+        <insert tableName="movie_genre">
+            <column name="movie_id" value="1"/>
+            <column name="genre_id" value="1"/>
+        </insert>
+        <insert tableName="movie_genre">
+            <column name="movie_id" value="2"/>
+            <column name="genre_id" value="2"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

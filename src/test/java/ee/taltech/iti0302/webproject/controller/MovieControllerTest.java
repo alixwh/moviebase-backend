@@ -21,35 +21,51 @@ class MovieControllerTest extends AbstractIntegrationTest {
 
     @Test
     void getMovieById() throws Exception {
-        mvc.perform(get("http://localhost:8080/api/public/movies/1").with(user("user")))
+        mvc.perform(get("/api/public/movies/1").with(user("user")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Black Panther: Wakanda Forever"));
     }
 
     @Test
     void getMovies() throws Exception {
-        mvc.perform(get("http://localhost:8080/api/public/movies").with(user("user")))
+        mvc.perform(get("/api/public/movies"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].title").value("Black Panther: Wakanda Forever"));
     }
 
     @Test
-    void getMoviesByActor() {
+    void getMoviesByActor() throws Exception {
+        mvc.perform(get("/api/public/movies/actor/2"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.[0].title").value("Black Panther: Wakanda Forever"));
     }
 
     @Test
-    void getMoviesByGenreId() {
+    void getMoviesByGenreId() throws Exception {
+        mvc.perform(get("/api/public/movies/genre/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.[0].title").value("Black Panther: Wakanda Forever"));
     }
 
     @Test
-    void getMoviesByReleaseYear() {
+    void getMoviesByReleaseYear() throws Exception {
+        mvc.perform(get("/api/public/movies/year/2022"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.[0].title").value("Black Panther: Wakanda Forever"))
+                .andExpect(jsonPath("$.[1].title").value("Fall"));
     }
 
     @Test
-    void getMoviesByName() {
+    void getMoviesByName() throws Exception{
+        mvc.perform(get("/api/public/search?query=Fall"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.[0].title").value("Fall"));
     }
 
     @Test
-    void getMoviesByYearsAndGenres() {
+    void getMoviesByYearsAndGenres() throws Exception {
+        mvc.perform(get("/api/public/filter?genre=2&year=2022"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[0].title").value("Fall"));
     }
 }
