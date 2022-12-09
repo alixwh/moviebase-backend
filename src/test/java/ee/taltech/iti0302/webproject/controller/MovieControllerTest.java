@@ -27,7 +27,10 @@ class MovieControllerTest extends AbstractIntegrationTest {
     }
 
     @Test
-    void getMovies() {
+    void getMovies() throws Exception {
+        mvc.perform(get("http://localhost:8080/api/public/movies").with(user("user")))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[0].title").value("Black Panther: Wakanda Forever"));
     }
 
     @Test
