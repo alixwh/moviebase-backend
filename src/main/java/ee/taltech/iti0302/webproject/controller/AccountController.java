@@ -38,7 +38,7 @@ public class AccountController {
 
     @PostMapping("public/register")
     public RegisterResponse createAccount(@RequestBody CreateAccountRequest createAccountRequest) {
-        return accountService.createAccount(createAccountRequest);
+        return accountService.createAccount(createAccountRequest.getUsername(), createAccountRequest.getPassword());
     }
 
     @PostMapping("public/login")

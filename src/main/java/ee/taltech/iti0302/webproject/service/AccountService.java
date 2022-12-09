@@ -1,8 +1,6 @@
 package ee.taltech.iti0302.webproject.service;
 
-import ee.taltech.iti0302.webproject.account.AccountRole;
 import ee.taltech.iti0302.webproject.account.login.LoginResponse;
-import ee.taltech.iti0302.webproject.account.register.CreateAccountRequest;
 import ee.taltech.iti0302.webproject.account.register.RegisterResponse;
 import ee.taltech.iti0302.webproject.dto.AccountDto;
 import ee.taltech.iti0302.webproject.dto.MovieDto;
@@ -45,12 +43,10 @@ public class AccountService {
         return accountMapper.toDto(accountRepository.findByUsername(username).orElse(null));
     }
 
-    public RegisterResponse createAccount(CreateAccountRequest createAccountRequest) {
-        Optional<Account> optionalAccount = accountRepository.findByUsername(createAccountRequest.getUsername());
+    public RegisterResponse createAccount(String username, String password) {
+        Optional<Account> optionalAccount = accountRepository.findByUsername(username);
         optionalAccount.ifPresent(error -> {throw new ApplicationException("Username taken");});
-        Account account = accountMapper.toEntity(createAccountRequest);
-        account.setPassword(passwordEncoder.encode(createAccountRequest.getPassword()));
-        account.setAccountRole(AccountRole.ROLE_USER);
+        Account account = Account.builder().username(username).password(passwordEncoder.encode(password)).build();
         accountRepository.save(account);
         return new RegisterResponse("register successful");
     }
@@ -66,8 +62,12 @@ public class AccountService {
         }
     }
 
-    public void delete(Integer id) {
-        accountRepository.deleteById(id);
+    public boolean delete(Integer id) {
+        if (accountRepository.existsById(id)) {
+            accountRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     public void addMovieToAccount(int accountId, int movieId, String state) {
@@ -87,8 +87,8 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public List<MovieDto> findWatchlist(Integer id, String state) {
-        Optional<Account> optionalAccount = accountRepository.findById(id);
+    public List<MovieDto> findWatchlist(Integer accountId, String state) {
+        Optional<Account> optionalAccount = accountRepository.findById(accountId);
         Account account = optionalAccount.orElseThrow(() -> new ApplicationException(NO_ACCOUNT_FOUND));
         Map<Movie, String> movieMap = account.getMovieMap();
         List<Movie> movies = movieMap.keySet()
