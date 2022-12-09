@@ -7,7 +7,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -21,35 +20,51 @@ class MovieControllerTest extends AbstractIntegrationTest {
 
     @Test
     void getMovieById() throws Exception {
-        mvc.perform(get("http://localhost:8080/api/public/movies/1").with(user("user")))
+        mvc.perform(get("/api/public/movies/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Black Panther: Wakanda Forever"));
     }
 
     @Test
     void getMovies() throws Exception {
-        mvc.perform(get("http://localhost:8080/api/public/movies").with(user("user")))
+        mvc.perform(get("/api/public/movies"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content[0].title").value("Black Panther: Wakanda Forever"));
+                .andExpect(jsonPath("$.content[0].id").value("1"));
     }
 
     @Test
-    void getMoviesByActor() {
+    void getMoviesByActor() throws Exception {
+        mvc.perform(get("/api/public/movies/actor/2"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.[0].title").value("Black Panther: Wakanda Forever"));
     }
 
     @Test
-    void getMoviesByGenreId() {
+    void getMoviesByGenreId() throws Exception {
+        mvc.perform(get("/api/public/movies/genre/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.[0].title").value("Black Panther: Wakanda Forever"));
     }
 
     @Test
-    void getMoviesByReleaseYear() {
+    void getMoviesByReleaseYear() throws Exception {
+        mvc.perform(get("/api/public/movies/year/2022"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.[0].title").value("Black Panther: Wakanda Forever"))
+                .andExpect(jsonPath("$.[1].title").value("Fall"));
     }
 
     @Test
-    void getMoviesByName() {
+    void getMoviesByName() throws Exception{
+        mvc.perform(get("/api/public/search?query=Fall"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.[0].title").value("Fall"));
     }
 
     @Test
-    void getMoviesByYearsAndGenres() {
+    void getMoviesByYearsAndGenres() throws Exception {
+        mvc.perform(get("/api/public/filter?genre=2&year=2022"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[0].title").value("Fall"));
     }
 }
