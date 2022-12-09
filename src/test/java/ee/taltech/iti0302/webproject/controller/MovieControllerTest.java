@@ -26,13 +26,6 @@ class MovieControllerTest extends AbstractIntegrationTest {
     }
 
     @Test
-    void getMovies() throws Exception {
-        mvc.perform(get("/api/public/movies"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content[0].id").value("1"));
-    }
-
-    @Test
     void getMoviesByActor() throws Exception {
         mvc.perform(get("/api/public/movies/actor/2"))
                 .andExpect(status().isOk())
