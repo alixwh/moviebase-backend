@@ -1,7 +1,6 @@
 package ee.taltech.iti0302.webproject.service;
 
 import ee.taltech.iti0302.webproject.dto.DirectorDto;
-import ee.taltech.iti0302.webproject.entities.Director;
 import ee.taltech.iti0302.webproject.mapper.DirectorMapper;
 import ee.taltech.iti0302.webproject.repository.DirectorRepository;
 import lombok.RequiredArgsConstructor;
