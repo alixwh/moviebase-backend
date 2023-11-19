@@ -62,6 +62,14 @@ In the directory where the docker-compose.yml is run the command
 docker-compose up
 ```
 
+### Adding movies to the database
+If you want to add movies to the database, then open Postman  
+and do a post request to http://localhost:8080/api/save/genres        -to first add all the genres  
+and then do a post request to http://localhost:8080/api/save/movies/1          - the last number being the number of pages of movies you'd like to be added to the database  
+
+If you type in a movie in the searchbar that does not yet exist in the database, then it is automatically added to the database.
+
+
 ### Website
 Visit our website:  
 http://moviebase.tk
