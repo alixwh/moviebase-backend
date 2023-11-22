@@ -1,7 +1,7 @@
 ## Moviebase
 Team members: Brigite Kerge, Häli Hinno  
 ### Project description
-Movie recommendation site. The visitor can get suggestions based on their answers to some questions. They can also sort movies based on categories etc and find information about the movies. It's possible to create a user where they can add ratings to movies and then get recommendations based on this data. Additionally users can create a watchlist. 
+Movie recommendation site. The visitor can get suggestions based on their answers to some questions. They can also filter and sort movies based on categories, release dates etc. and find information about the movies. It's possible to create a user and add movies to watchlists. 
 ### Technologies used
 Gradle  
 Java 17   
@@ -68,8 +68,3 @@ and do a post request to http://localhost:8080/api/save/genres        -to first 
 and then do a post request to http://localhost:8080/api/save/movies/1          - the last number being the number of pages of movies you'd like to be added to the database  
 
 If you type in a movie in the searchbar that does not yet exist in the database, then it is automatically added to the database.
-
-
-### Website
-Visit our website:  
-http://moviebase.tk
